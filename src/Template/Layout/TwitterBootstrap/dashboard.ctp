@@ -22,18 +22,28 @@ $this->start('tb_body_start');
                 <ul class="nav navbar-nav navbar-right visible-xs">
                     <?= $this->fetch('tb_actions') ?>
                 </ul>
-                <!--
+                
                 <ul class="nav navbar-nav navbar-right">
                     <li class="nav-divider"></li>
-                    <li><a href="#">Dashboard</a></li>
+                    <li><?= $this->Html->link(__('Ativos'), ['controller' => 'ativos', 'action' => 'index']) ?> </li>
+                    <li><?= $this->Html->link(__('Cotações'), ['controller' => 'cotacaos', 'action' => 'index']) ?> </li>
+                    <!--<li><a href="#">Dashboard</a></li>
                     <li><a href="#">Settings</a></li>
                     <li><a href="#">Profile</a></li>
-                    <li><a href="#">Help</a></li>
+                    <li><a href="#">Help</a></li>-->
+                    <?php if (isset($_SESSION['Auth']['User']['email'])): ?>
+                        <li>
+                            <div style="line-height: 2.8125rem;padding: 0 0.9375rem; color: #9d9d9d">
+                                <?=$_SESSION['Auth']['User']['email']?>
+                                <?= $this->Html->link(__('(sair)'), ['controller' => 'users', 'action' => 'logout']) ?>
+                            </div>
+                        </li>
+                    <?php endif; ?>
                 </ul>
-                <form class="navbar-form navbar-right">
+                <!--<form class="navbar-form navbar-right">
                     <input type="text" class="form-control" placeholder="Search...">
-                </form>
-                -->
+                </form>-->
+                
             </div>
         </div>
     </div>
