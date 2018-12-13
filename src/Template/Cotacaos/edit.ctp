@@ -41,7 +41,7 @@ $this->start('tb_sidebar');
 <?php
 $this->end();
 ?>
-<?= $this->Form->create($cotacao); ?>
+<?= $this->Form->create($cotacao, ['type'=>'post','enctype' => 'multipart/form-data']); ?>
 <fieldset>
     <legend><?= __('Edit {0}', ['Cotacao']) ?></legend>
     <?php

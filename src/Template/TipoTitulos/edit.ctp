@@ -45,7 +45,7 @@ $this->start('tb_sidebar');
 <?php
 $this->end();
 ?>
-<?= $this->Form->create($tipoTitulo); ?>
+<?= $this->Form->create($tipoTitulo, ['type'=>'post','enctype' => 'multipart/form-data']); ?>
 <fieldset>
     <legend><?= __('Edit {0}', ['Tipo Titulo']) ?></legend>
     <?php

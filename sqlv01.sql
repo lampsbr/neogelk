@@ -119,8 +119,10 @@ CREATE TABLE IF NOT EXISTS `neogelk`.`cotacaos` (
     FOREIGN KEY (`ativos_id`)
     REFERENCES `neogelk`.`ativos` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    ON UPDATE NO ACTION);
+
+--CRIANDO USER DEFAULT
+INSERT INTO users (email, password, created, modified) VALUES ('lamparolho@gmail.com', '$2y$10$6VzBp58gu0mfw.k.YRnkveGrRh8Krb478crnnREeCBsx6wh7NoO.m', NOW(), NOW());
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
