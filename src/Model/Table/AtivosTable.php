@@ -7,12 +7,12 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 use SoftDelete\Model\Table\SoftDeleteTrait;
 
-
 /**
  * Ativos Model
  *
  * @property \App\Model\Table\TitulosTable|\Cake\ORM\Association\BelongsTo $Titulos
  * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
+ * @property |\Cake\ORM\Association\HasMany $Cotacaos
  *
  * @method \App\Model\Entity\Ativo get($primaryKey, $options = [])
  * @method \App\Model\Entity\Ativo newEntity($data = null, array $options = [])
@@ -52,6 +52,9 @@ class AtivosTable extends Table
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
+        ]);
+        $this->hasMany('Cotacaos', [
+            'foreignKey' => 'ativo_id'
         ]);
     }
 

@@ -42,11 +42,11 @@ $this->end();
         </tr>
         <tr>
             <td><?= __('Titulo') ?></td>
-            <td><?= $ativo->has('titulo') ? $this->Html->link($ativo->titulo->id, ['controller' => 'Titulos', 'action' => 'view', $ativo->titulo->id]) : '' ?></td>
+            <td><?= $ativo->has('titulo') ? $this->Html->link($ativo->titulo->nome, ['controller' => 'Titulos', 'action' => 'view', $ativo->titulo->id]) : '' ?></td>
         </tr>
         <tr>
             <td><?= __('User') ?></td>
-            <td><?= $ativo->has('user') ? $this->Html->link($ativo->user->id, ['controller' => 'Users', 'action' => 'view', $ativo->user->id]) : '' ?></td>
+            <td><?= $ativo->has('user') ? $this->Html->link($ativo->user->email, ['controller' => 'Users', 'action' => 'view', $ativo->user->id]) : '' ?></td>
         </tr>
         <tr>
             <td><?= __('Quantidade') ?></td>

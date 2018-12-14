@@ -21,7 +21,7 @@ class CotacaosController extends AppController
         }
         return false;
     }
-    
+
     /**
      * Index method
      *

@@ -45,7 +45,7 @@ $this->start('tb_sidebar');
 <?php
 $this->end();
 ?>
-<?= $this->Form->create($ativo, ['type'=>'post','enctype' => 'multipart/form-data']); ?>
+?= $this->Form->create($ativo, ['type'=>'post','enctype' => 'multipart/form-data']); ?>
 <fieldset>
     <legend><?= __('Edit {0}', ['Ativo']) ?></legend>
     <?php

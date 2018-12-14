@@ -14,7 +14,7 @@ $this->start('tb_actions');
         <tr>
             <th><?= $this->Paginator->sort('data'); ?></th>
             <th><?= $this->Paginator->sort('valor'); ?></th>
-            <th><?= $this->Paginator->sort('ativos_id'); ?></th>
+            <th><?= $this->Paginator->sort('ativo_id'); ?></th>
             <th class="actions"><?= __('Actions'); ?></th>
         </tr>
     </thead>
@@ -23,9 +23,7 @@ $this->start('tb_actions');
         <tr>
             <td><?= h($cotacao->data) ?></td>
             <td><?= $this->Number->format($cotacao->valor) ?></td>
-            <td>
-                <?= $cotacao->has('ativo') ? $this->Html->link($cotacao->ativo->titulo->nome, ['controller' => 'Ativos', 'action' => 'view', $cotacao->ativo->id]) : '' ?>
-            </td>
+            <td><?= h($cotacao->ativo_id) ?></td>
             <td class="actions">
                 <?= $this->Html->link('', ['action' => 'view', $cotacao->id], ['title' => __('View'), 'class' => 'btn btn-default glyphicon glyphicon-eye-open']) ?>
                 <?= $this->Html->link('', ['action' => 'edit', $cotacao->id], ['title' => __('Edit'), 'class' => 'btn btn-default glyphicon glyphicon-pencil']) ?>

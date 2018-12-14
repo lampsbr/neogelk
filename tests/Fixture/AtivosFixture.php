@@ -51,15 +51,15 @@ class AtivosFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => 'd436e072-ce0a-46e1-9169-35848a06ae99',
-                'created' => '2018-12-13 20:33:33',
-                'modified' => '2018-12-13 20:33:33',
-                'deleted' => '2018-12-13 20:33:33',
-                'dt_compra' => '2018-12-13 20:33:33',
-                'dt_venda' => '2018-12-13 20:33:33',
+                'id' => '0333cccf-1594-4913-88c5-c7b3f2d51aed',
+                'created' => '2018-12-14 19:41:50',
+                'modified' => '2018-12-14 19:41:50',
+                'deleted' => '2018-12-14 19:41:50',
+                'dt_compra' => '2018-12-14 19:41:50',
+                'dt_venda' => '2018-12-14 19:41:50',
                 'quantidade' => 1.5,
-                'titulo_id' => '3b30e493-4626-4130-99ac-897ac851364e',
-                'user_id' => '3c27a9bb-d961-4540-a1f9-5a6da2c5d9e8'
+                'titulo_id' => 'c3c773b8-4d45-49e2-af94-20593cec44f1',
+                'user_id' => '93730328-44f5-4dc6-8c0b-41f46129b6c1'
             ],
         ];
         parent::init();

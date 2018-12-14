@@ -12,7 +12,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime|null $deleted
  * @property \Cake\I18n\FrozenTime $data
  * @property float $valor
- * @property string $ativos_id
+ * @property string $ativo_id
  *
  * @property \App\Model\Entity\Ativo $ativo
  */
@@ -34,7 +34,7 @@ class Cotacao extends Entity
         'deleted' => true,
         'data' => true,
         'valor' => true,
-        'ativos_id' => true,
+        'ativo_id' => true,
         'ativo' => true
     ];
 }

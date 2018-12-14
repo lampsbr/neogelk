@@ -41,14 +41,14 @@ $this->start('tb_sidebar');
 <?php
 $this->end();
 ?>
-<?= $this->Form->create($cotacao, ['type'=>'post','enctype' => 'multipart/form-data']); ?>
+?= $this->Form->create($cotacao, ['type'=>'post','enctype' => 'multipart/form-data']); ?>
 <fieldset>
     <legend><?= __('Edit {0}', ['Cotacao']) ?></legend>
     <?php
     echo $this->Form->control('deleted');
     echo $this->Form->control('data');
     echo $this->Form->control('valor');
-    echo $this->Form->control('ativos_id', ['options' => $ativos]);
+    echo $this->Form->control('ativo_id');
     ?>
 </fieldset>
 <?= $this->Form->button(__("Save")); ?>

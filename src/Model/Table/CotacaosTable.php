@@ -7,7 +7,6 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 use SoftDelete\Model\Table\SoftDeleteTrait;
 
-
 /**
  * Cotacaos Model
  *
@@ -45,8 +44,7 @@ class CotacaosTable extends Table
         $this->addBehavior('Timestamp');
 
         $this->belongsTo('Ativos', [
-            'foreignKey' => 'ativos_id',
-            'joinType' => 'INNER'
+            'foreignKey' => 'ativo_id'
         ]);
     }
 
@@ -84,7 +82,7 @@ class CotacaosTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['ativos_id'], 'Ativos'));
+        $rules->add($rules->existsIn(['ativo_id'], 'Ativos'));
 
         return $rules;
     }

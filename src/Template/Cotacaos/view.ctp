@@ -37,8 +37,8 @@ $this->end();
             <td><?= h($cotacao->id) ?></td>
         </tr>
         <tr>
-            <td><?= __('Ativo') ?></td>
-            <td><?= $cotacao->has('ativo') ? $this->Html->link($cotacao->ativo->id, ['controller' => 'Ativos', 'action' => 'view', $cotacao->ativo->id]) : '' ?></td>
+            <td><?= __('Ativo Id') ?></td>
+            <td><?= h($cotacao->ativo_id) ?></td>
         </tr>
         <tr>
             <td><?= __('Valor') ?></td>

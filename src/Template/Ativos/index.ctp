@@ -14,7 +14,7 @@ $this->start('tb_actions');
 <table class="table table-striped" cellpadding="0" cellspacing="0">
     <thead>
         <tr>
-            <th><?= $this->Paginator->sort('titulo.nome'); ?></th>
+        <th><?= $this->Paginator->sort('titulo.nome'); ?></th>
             <th><?= $this->Paginator->sort('dt_compra'); ?></th>
             <th><?= $this->Paginator->sort('dt_venda'); ?></th>
             <th><?= $this->Paginator->sort('quantidade'); ?></th>
@@ -24,7 +24,7 @@ $this->start('tb_actions');
     <tbody>
         <?php foreach ($ativos as $ativo): ?>
         <tr>
-            <td><?= h($ativo->titulo->nome) ?></td>
+        <td><?= h($ativo->titulo->nome) ?></td>
             <td><?= h($ativo->dt_compra) ?></td>
             <td><?= h($ativo->dt_venda) ?></td>
             <td><?= $this->Number->format($ativo->quantidade) ?></td>

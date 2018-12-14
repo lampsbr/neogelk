@@ -31,7 +31,7 @@ $this->end();
     <?php
     echo $this->Form->control('data');
     echo $this->Form->control('valor');
-    echo $this->Form->control('ativos_id', ['options' => $ativos ]);
+    echo $this->Form->control('ativo_id');
     ?>
 </fieldset>
 <?= $this->Form->button(__("Add")); ?>

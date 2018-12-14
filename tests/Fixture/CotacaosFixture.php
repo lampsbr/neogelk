@@ -23,13 +23,13 @@ class CotacaosFixture extends TestFixture
         'deleted' => ['type' => 'datetime', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         'data' => ['type' => 'datetime', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'valor' => ['type' => 'decimal', 'length' => 15, 'precision' => 2, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => ''],
-        'ativos_id' => ['type' => 'uuid', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
+        'ativo_id' => ['type' => 'uuid', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         '_indexes' => [
-            'fk_cotacaos_ativos1_idx' => ['type' => 'index', 'columns' => ['ativos_id'], 'length' => []],
+            'fk_cotacaos_ativos1_idx' => ['type' => 'index', 'columns' => ['ativo_id'], 'length' => []],
         ],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
-            'fk_cotacaos_ativos1' => ['type' => 'foreign', 'columns' => ['ativos_id'], 'references' => ['ativos', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
+            'fk_cotacaos_ativos1' => ['type' => 'foreign', 'columns' => ['ativo_id'], 'references' => ['ativos', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -47,13 +47,13 @@ class CotacaosFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => 'e5affd65-9eee-4957-92e8-3cc527f309ea',
-                'created' => '2018-12-13 20:33:43',
-                'modified' => '2018-12-13 20:33:43',
-                'deleted' => '2018-12-13 20:33:43',
-                'data' => '2018-12-13 20:33:43',
+                'id' => '0f20c367-4f03-48af-9f24-90ea6ec85527',
+                'created' => '2018-12-14 19:42:02',
+                'modified' => '2018-12-14 19:42:02',
+                'deleted' => '2018-12-14 19:42:02',
+                'data' => '2018-12-14 19:42:02',
                 'valor' => 1.5,
-                'ativos_id' => 'ed88493b-f7e1-4c01-bde1-57ac2cb90aa6'
+                'ativo_id' => 'e5436c50-4c72-4708-8e3f-6c224895170c'
             ],
         ];
         parent::init();
