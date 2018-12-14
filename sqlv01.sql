@@ -112,11 +112,11 @@ CREATE TABLE IF NOT EXISTS `neogelk`.`cotacaos` (
   `deleted` DATETIME NULL,
   `data` DATETIME NOT NULL,
   `valor` DECIMAL(15,2) NOT NULL,
-  `ativos_id` CHAR(36) NOT NULL,
+  `ativo_id` CHAR(36) NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_cotacaos_ativos1_idx` (`ativos_id` ASC),
+  INDEX `fk_cotacaos_ativos1_idx` (`ativo_id` ASC),
   CONSTRAINT `fk_cotacaos_ativos1`
-    FOREIGN KEY (`ativos_id`)
+    FOREIGN KEY (`ativo_id`)
     REFERENCES `neogelk`.`ativos` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
