@@ -65,6 +65,10 @@ class AppController extends Controller
                 'controller' => 'Users',
                 'action' => 'login'
             ],
+            'loginRedirect' => [
+                'controller' => 'Ativos',
+                'action' => 'index'
+            ],
              //use isAuthorized in Controllers
             'authorize' => ['Controller'],
              // If unauthorized, return them to page they were just on

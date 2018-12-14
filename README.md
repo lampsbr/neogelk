@@ -1,8 +1,8 @@
 Adicionar instruções gerais e TODO aqui. =]
 
 //TODO:
-- CONSERTAR A PESTE DA CHAVE DE Cotacaos. o RELACIONAMENTO TÁ CAGADO POR CAUSA DISSO
-- Ligar Cotações a títulos, ao invés de ativos. Isso significará muito quando/se houver muitos usuários e um webscrapper para cotações.
+- Tela DASHBOARD com todos ativos do usuário, valor atual, lucro total, lucro no ano, lucro vs inflação...
+- Implementar índices para comparar os investimentos.
 - usuário comum e usuário admin (uau)
 - Cadastrar tipos, títulos e ativos automaticamente com o login do usr.
 
