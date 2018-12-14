@@ -1,7 +1,9 @@
 Adicionar instruções gerais e TODO aqui. =]
 
 //TODO:
-- Tela DASHBOARD com todos ativos do usuário, valor atual, lucro total, lucro no ano, lucro vs inflação...
+- Quick add ativo no dashboard
+- Quick add cotação no dashboard
+- Tela DASHBOARD incluir lucro total, lucro no ano, lucro vs inflação...
 - Implementar índices para comparar os investimentos.
 - usuário comum e usuário admin (uau)
 - Cadastrar tipos, títulos e ativos automaticamente com o login do usr.

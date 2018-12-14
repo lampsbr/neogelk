@@ -9,8 +9,7 @@ $this->extend('../Layout/TwitterBootstrap/dashboard');
 
 $this->start('tb_actions');
 ?>
-    <li><?=
-    $this->Form->postLink(
+    <li><?=$this->Form->postLink(
         __('Delete'),
         ['action' => 'delete', $ativo->id],
         ['confirm' => __('Are you sure you want to delete # {0}?', $ativo->id)]
@@ -42,10 +41,8 @@ $this->start('tb_sidebar');
     <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
     <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
 </ul>
-<?php
-$this->end();
-?>
-?= $this->Form->create($ativo, ['type'=>'post','enctype' => 'multipart/form-data']); ?>
+<?php $this->end(); ?>
+<?= $this->Form->create($ativo, ['type'=>'post','enctype' => 'multipart/form-data']); ?>
 <fieldset>
     <legend><?= __('Edit {0}', ['Ativo']) ?></legend>
     <?php

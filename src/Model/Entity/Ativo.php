@@ -2,6 +2,7 @@
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
+use Cake\I18n\Time;
 
 /**
  * Ativo Entity
@@ -43,4 +44,26 @@ class Ativo extends Entity
         'titulo' => true,
         'user' => true
     ];
+
+    //só usar com entidade bem hidratada.
+    protected function _getSaldo(){
+        return $this->titulo->moeda.' '.($this->quantidade * $this->valorCotacaoMaisRecente);
+    }
+
+    protected function _getValorCotacaoMaisRecente(){
+        if(is_null($this->cotacaos) || empty($this->cotacaos)){
+            return 0;
+        }
+
+        //buscar a última cotação válida. 
+        //Se o produto não tiver data de venda, é a mais recente. 
+        //Se o produto tiver data de venda, é a mais recente que seja mais antiga que a data de venda.
+        $cotacaoMaisRecente = $this->cotacaos[0];
+        foreach ($this->cotacaos as $cot) {
+            if($cot->data->gt($cotacaoMaisRecente->data) && ($this->dt_venda==null || $cot->data->lt($this->dt_venda))){
+                $cotacaoMaisRecente = $cot;
+            }
+        }
+        return $cotacaoMaisRecente->valor;
+    }
 }

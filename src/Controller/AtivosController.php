@@ -16,7 +16,7 @@ class AtivosController extends AppController
     public function isAuthorized($user){
         $action = $this->request->getParam('action');
         //por enquanto libera todas ações para quem estiver logado
-        if (in_array($action, ['add', 'edit', 'index', 'delete', 'view'])) {
+        if (in_array($action, ['add', 'edit', 'index', 'delete', 'view', 'dashboard'])) {
             return true;
         }
         return false;
@@ -34,6 +34,15 @@ class AtivosController extends AppController
         ];
         $ativos = $this->paginate($this->Ativos);
 
+        $this->set(compact('ativos'));
+    }
+
+    public function dashboard(){
+        $ativos = $this->Ativos->find()
+            ->where(['Ativos.user_id' => $this->Auth->user('id')])
+            ->contain(['Titulos', 'Cotacaos'])
+            ->order(['dt_venda' => 'asc', 'dt_compra' => 'desc'])
+            ->all();
         $this->set(compact('ativos'));
     }
 
