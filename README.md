@@ -1,7 +1,7 @@
 Adicionar instruções gerais e TODO aqui. =]
 
 //TODO:
-- mostrar históricos de cotações de um ativo em seu view.
+- Lucro total e %: (primeira cotação * quantidade comprada)-(cotação mais atual * quantidade comprada). Dividindo esses dois fatores pega a porcentagem de lucro/prejú.
 - Tela DASHBOARD incluir lucro total, lucro no ano, lucro vs inflação...
 - Implementar índices para comparar os investimentos.
 - usuário comum e usuário admin (uau)

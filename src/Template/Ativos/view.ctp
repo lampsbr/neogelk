@@ -12,6 +12,8 @@ $this->start('tb_actions');
 <li><?= $this->Html->link(__('New Titulo'), ['controller' => 'Titulos', 'action' => 'add']) ?> </li>
 <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
 <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
+<li><?= $this->Html->link(__('List Cotacaos'), ['controller' => 'Cotacaos', 'action' => 'index']) ?> </li>
+<li><?= $this->Html->link(__('New Cotacao'), ['controller' => 'Cotacaos', 'action' => 'add']) ?> </li>
 <?php
 $this->end();
 
@@ -26,6 +28,8 @@ $this->start('tb_sidebar');
 <li><?= $this->Html->link(__('New Titulo'), ['controller' => 'Titulos', 'action' => 'add']) ?> </li>
 <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
 <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
+<li><?= $this->Html->link(__('List Cotacaos'), ['controller' => 'Cotacaos', 'action' => 'index']) ?> </li>
+<li><?= $this->Html->link(__('New Cotacao'), ['controller' => 'Cotacaos', 'action' => 'add']) ?> </li>
 </ul>
 <?php
 $this->end();
@@ -33,7 +37,7 @@ $this->end();
 <div class="panel panel-default">
     <!-- Panel header -->
     <div class="panel-heading">
-        <h3 class="panel-title"><?= h($ativo->id) ?></h3>
+        <h3 class="panel-title"><?= h($ativo->titulo->nome) ?></h3>
     </div>
     <table class="table table-striped" cellpadding="0" cellspacing="0">
         <tr>
@@ -75,3 +79,33 @@ $this->end();
     </table>
 </div>
 
+<div class="panel panel-default">
+    <!-- Panel header -->
+    <div class="panel-heading">
+        <h3 class="panel-title"><?= 'Cotações' ?></h3>
+    </div>
+    <?php if (!empty($ativo->cotacaos)): ?>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th><?= __('Data') ?></th>
+                <th><?= __('Valor') ?></th>
+                <th class="actions"><?= __('Actions') ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($ativo->cotacaos as $cotacaos): ?>
+                <tr>
+                    <td><?= h($cotacaos->data) ?></td>
+                    <td><?= h($cotacaos->valor) ?></td>
+                    <td class="actions">
+                        <?= $this->Form->postLink('', ['controller' => 'Cotacaos', 'action' => 'delete', $cotacaos->id], ['confirm' => __('Are you sure you want to delete # {0}?', $cotacaos->id), 'title' => __('Delete'), 'class' => 'btn btn-default glyphicon glyphicon-trash']) ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php else: ?>
+        <p class="panel-body">no related Cotacaos</p>
+    <?php endif; ?>
+</div>

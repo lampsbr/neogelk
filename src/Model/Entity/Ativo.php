@@ -66,4 +66,22 @@ class Ativo extends Entity
         }
         return $cotacaoMaisRecente->valor;
     }
+
+    /**
+     * retorna as 3 últimas cotações do ativo, em String
+     */
+    protected function _getUltimasCotacoes(){
+        if(is_null($this->cotacaos) || empty($this->cotacaos)){
+            return '';
+        }
+        $retorno = '';
+        foreach($this->cotacaos as $indice => $cot) {
+            if(!empty($retorno)){
+                $retorno .= ', ';
+            }
+            $retorno .= $cot->valor;
+            if($indice > 1) return $retorno;
+        }
+        return $retorno;
+    }
 }

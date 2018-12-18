@@ -40,7 +40,7 @@ class AtivosController extends AppController
     public function dashboard(){
         $ativos = $this->Ativos->find()
             ->where(['Ativos.user_id' => $this->Auth->user('id')])
-            ->contain(['Titulos', 'Cotacaos'])
+            ->contain(['Titulos', 'Cotacaos' => ['sort' => ['Cotacaos.data' => 'DESC']]])
             ->order(['dt_venda' => 'asc', 'dt_compra' => 'desc'])
             ->all();
         $this->set(compact('ativos'));
@@ -56,7 +56,7 @@ class AtivosController extends AppController
     public function view($id = null)
     {
         $ativo = $this->Ativos->get($id, [
-            'contain' => ['Titulos', 'Users']
+            'contain' => ['Titulos', 'Users', 'Cotacaos']
         ]);
 
         $this->set('ativo', $ativo);

@@ -13,6 +13,7 @@ $this->end();
             <th>Data de venda</th>
             <th>Quantidade</th>
             <th>Saldo</th>
+            <th>Últimas cotações</th>
             <th class="actions">Ações</th>
         </tr>
     </thead>
@@ -24,21 +25,23 @@ $this->end();
             <td><?= h($ativo->dt_venda) ?></td>
             <td><?= $this->Number->format($ativo->quantidade) ?></td>
             <td><?= $ativo->saldo ?></td>
+            <td><?= $ativo->ultimasCotacoes ?></td>
             <td class="actions">
-            
-                <div class="row">
-                    <div class="col-lg-6">
-                        <?= $this->Form->create('', ['url' => ['controller' => 'cotacaos', 'action' => 'quickadd']]) ?>
-                            <?= $this->Form->hidden('ativo_id', ['value' => $ativo->id]) ?>
-                            <div class="input-group">
-                                <input type="decimal" class="form-control" placeholder="Insira cotação de hoje" required="true" name="valor">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="submit">Salvar</button>
-                                </span>
-                            </div>
-                        <?= $this->Form->end() ?>
+                <?php if(empty($ativo->dt_venda)){ ?>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <?= $this->Form->create('', ['url' => ['controller' => 'cotacaos', 'action' => 'quickadd']]) ?>
+                                <?= $this->Form->hidden('ativo_id', ['value' => $ativo->id]) ?>
+                                <div class="input-group">
+                                    <input type="decimal" class="form-control" placeholder="Insira cotação de hoje" required="true" name="valor">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="submit">Salvar</button>
+                                    </span>
+                                </div>
+                            <?= $this->Form->end() ?>
+                        </div>
                     </div>
-                </div>
+                <?php } ?>
 
 
                 <?= $this->Html->link('', ['action' => 'view', $ativo->id], ['title' => __('View'), 'class' => 'btn btn-default glyphicon glyphicon-eye-open']) ?>
