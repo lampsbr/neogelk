@@ -23,7 +23,7 @@ $this->start('tb_actions');
         <tr>
             <td><?= h($cotacao->data) ?></td>
             <td><?= $this->Number->format($cotacao->valor) ?></td>
-            <td><?= h($cotacao->ativo_id) ?></td>
+            <td><?= h($cotacao->ativo->titulo->nome) ?></td>
             <td class="actions">
                 <?= $this->Html->link('', ['action' => 'view', $cotacao->id], ['title' => __('View'), 'class' => 'btn btn-default glyphicon glyphicon-eye-open']) ?>
                 <?= $this->Html->link('', ['action' => 'edit', $cotacao->id], ['title' => __('Edit'), 'class' => 'btn btn-default glyphicon glyphicon-pencil']) ?>

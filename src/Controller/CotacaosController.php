@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\I18n\Time;
 
 /**
  * Cotacaos Controller
@@ -16,7 +17,7 @@ class CotacaosController extends AppController
     public function isAuthorized($user){
         $action = $this->request->getParam('action');
         //por enquanto libera todas ações para quem estiver logado
-        if (in_array($action, ['add', 'edit', 'index', 'delete', 'view'])) {
+        if (in_array($action, ['add', 'quickadd', 'edit', 'index', 'delete', 'view'])) {
             return true;
         }
         return false;
@@ -72,6 +73,28 @@ class CotacaosController extends AppController
         }
         $ativos = $this->Cotacaos->Ativos->find('list', ['keyField' => 'id', 'valueField' => 'titulo.nome'])->contain(['Titulos']);
         $this->set(compact('cotacao', 'ativos'));
+    }
+
+    public function quickadd(){
+        $cotacao = $this->Cotacaos->newEntity();
+        $dados = $this->request->getData();
+        $agora = Time::now();
+        $dados['data'] = [
+            'year' => $agora->year,
+            'month' => $agora->month,
+            'day' => $agora->day,
+            'hour' => $agora->hour,
+            'minute' => $agora->minute
+        ];
+        if ($this->request->is('post')) {
+            $cotacao = $this->Cotacaos->patchEntity($cotacao, $dados);
+            if ($this->Cotacaos->save($cotacao)) {
+                $this->Flash->success('A nova cotação foi salva!');
+            } else{
+                $this->Flash->error('Houve algum problema ao salvar a cotação. Você colocou mesmo um valor decimal?');
+            }
+            return $this->redirect(['controller' => 'ativos', 'action' => 'dashboard']);
+        }
     }
 
     /**

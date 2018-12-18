@@ -1,8 +1,6 @@
 Adicionar instruções gerais e TODO aqui. =]
 
 //TODO:
-- Quick add ativo no dashboard
-- Quick add cotação no dashboard
 - mostrar históricos de cotações de um ativo em seu view.
 - Tela DASHBOARD incluir lucro total, lucro no ano, lucro vs inflação...
 - Implementar índices para comparar os investimentos.
