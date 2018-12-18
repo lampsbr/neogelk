@@ -67,6 +67,29 @@ class Ativo extends Entity
         return $cotacaoMaisRecente->valor;
     }
 
+    protected function _getValorPrimeiraCotacao(){
+        if(is_null($this->cotacaos) || empty($this->cotacaos)){
+            return 0;
+        }
+
+        //buscar a primeira cotação válida. 
+        $cotacaoMaisAntiga = $this->cotacaos[0];
+        foreach ($this->cotacaos as $cot) {
+            if($cot->data->lt($cotacaoMaisAntiga->data) && ($cot->data->gt($this->dt_compra))){
+                $cotacaoMaisAntiga = $cot;
+            }
+        }
+        return $cotacaoMaisAntiga->valor;
+    }
+
+    protected function _getLucroTotal(){
+        return round($this->quantidade * ($this->valorCotacaoMaisRecente - $this->valorPrimeiraCotacao),2);
+    }
+
+    protected function _getLucroPorcento(){
+        return '('.round((($this->valorCotacaoMaisRecente / $this->valorPrimeiraCotacao)-1)*100,2).'%)';
+    }
+
     /**
      * retorna as 3 últimas cotações do ativo, em String
      */

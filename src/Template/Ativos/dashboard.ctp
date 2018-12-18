@@ -13,6 +13,7 @@ $this->end();
             <th>Data de venda</th>
             <th>Quantidade</th>
             <th>Saldo</th>
+            <th>Lucro</th>
             <th>Últimas cotações</th>
             <th class="actions">Ações</th>
         </tr>
@@ -25,6 +26,7 @@ $this->end();
             <td><?= h($ativo->dt_venda) ?></td>
             <td><?= $this->Number->format($ativo->quantidade) ?></td>
             <td><?= $ativo->saldo ?></td>
+            <td><?= $ativo->lucroTotal.' '.$ativo->lucroPorcento ?></td>
             <td><?= $ativo->ultimasCotacoes ?></td>
             <td class="actions">
                 <?php if(empty($ativo->dt_venda)){ ?>
