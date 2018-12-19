@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+//use Cake\Log\Log;
 
 /**
  * Users Controller
@@ -20,7 +21,8 @@ class UsersController extends AppController
     public function isAuthorized($user){
         $action = $this->request->getParam('action');
         //por enquanto libera todas ações para quem estiver logado
-        if (in_array($action, ['add', 'edit', 'index', 'delete', 'view'])) {
+        if (isset($user['permissao']) && $user['permissao']>=100 
+            && in_array($action, ['add', 'edit', 'index', 'delete', 'view'])) {
             return true;
         }
         return false;
@@ -121,6 +123,7 @@ class UsersController extends AppController
     public function login(){
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
+            //Log::write('debug',$user);
             if ($user) {
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
