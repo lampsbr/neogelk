@@ -82,12 +82,38 @@ class Ativo extends Entity
         return $cotacaoMaisAntiga->valor;
     }
 
+    //retorna a primeira cotação do ano
+    protected function _getValorPrimeiraCotacaoAno(){
+        if(is_null($this->cotacaos) || empty($this->cotacaos)){
+            return 0;
+        }
+        $comecoDoAno = Time::now();
+        $comecoDoAno->month(01)->day(01)->hour(00)->minute(00)->second(01);
+
+        //buscar a primeira cotação válida. 
+        $cotacaoMaisAntiga = $this->cotacaos[0];
+        foreach ($this->cotacaos as $cot) {
+            if($cot->data->lt($cotacaoMaisAntiga->data) && ($cot->data->gt($comecoDoAno))){
+                $cotacaoMaisAntiga = $cot;
+            }
+        }
+        return $cotacaoMaisAntiga->valor;
+    }
+
     protected function _getLucroTotal(){
         return round($this->quantidade * ($this->valorCotacaoMaisRecente - $this->valorPrimeiraCotacao),2);
     }
 
     protected function _getLucroPorcento(){
         return '('.round((($this->valorCotacaoMaisRecente / $this->valorPrimeiraCotacao)-1)*100,2).'%)';
+    }
+
+    protected function _getLucroNoAno(){
+        return round($this->quantidade * ($this->valorCotacaoMaisRecente - $this->valorPrimeiraCotacaoAno),2);
+    }
+
+    protected function _getLucroNoAnoPorcento(){
+        return '('.round((($this->valorCotacaoMaisRecente / $this->valorPrimeiraCotacaoAno)-1)*100,2).'%)';
     }
 
     /**
