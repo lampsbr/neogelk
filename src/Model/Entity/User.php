@@ -13,6 +13,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime|null $deleted
  * @property string $email
  * @property string $password
+ * @property int $permissao
  *
  * @property \App\Model\Entity\Ativo[] $ativos
  * @property \App\Model\Entity\TipoTitulo[] $tipo_titulos
@@ -36,6 +37,7 @@ class User extends Entity
         'deleted' => true,
         'email' => true,
         'password' => true,
+        'permissao' => true,
         'ativos' => true,
         'tipo_titulos' => true,
         'titulos' => true

@@ -19,6 +19,7 @@ $this->start('tb_actions');
             <th><?= $this->Paginator->sort('created'); ?></th>
             <th><?= $this->Paginator->sort('modified'); ?></th>
             <th><?= $this->Paginator->sort('email'); ?></th>
+            <th><?= $this->Paginator->sort('permissao'); ?></th>
             <th class="actions"><?= __('Actions'); ?></th>
         </tr>
     </thead>
@@ -28,6 +29,7 @@ $this->start('tb_actions');
             <td><?= h($user->created) ?></td>
             <td><?= h($user->modified) ?></td>
             <td><?= h($user->email) ?></td>
+            <td><?= h($user->permissao) ?></td>
             <td class="actions">
                 <?= $this->Html->link('', ['action' => 'view', $user->id], ['title' => __('View'), 'class' => 'btn btn-default glyphicon glyphicon-eye-open']) ?>
                 <?= $this->Html->link('', ['action' => 'edit', $user->id], ['title' => __('Edit'), 'class' => 'btn btn-default glyphicon glyphicon-pencil']) ?>

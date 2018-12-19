@@ -49,8 +49,8 @@ $this->end();
             <td><?= h($user->email) ?></td>
         </tr>
         <tr>
-            <td><?= __('Password') ?></td>
-            <td><?= h($user->password) ?></td>
+            <td><?= __('Permissao') ?></td>
+            <td><?= h($user->permissao) ?></td>
         </tr>
         <tr>
             <td><?= __('Created') ?></td>

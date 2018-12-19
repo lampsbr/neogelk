@@ -39,6 +39,7 @@ $this->end();
     <?php
     echo $this->Form->control('email');
     echo $this->Form->control('password');
+    echo $this->Form->control('permissao');
     ?>
 </fieldset>
 <?= $this->Form->button(__("Add")); ?>

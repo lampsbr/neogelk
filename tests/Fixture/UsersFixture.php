@@ -23,6 +23,7 @@ class UsersFixture extends TestFixture
         'deleted' => ['type' => 'datetime', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         'email' => ['type' => 'string', 'length' => 100, 'null' => false, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'password' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'permissao' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => '1', 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
         ],
@@ -42,12 +43,13 @@ class UsersFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => '02cc6f89-431e-4894-9175-c605d74df01d',
-                'created' => '2018-12-13 20:24:25',
-                'modified' => '2018-12-13 20:24:25',
-                'deleted' => '2018-12-13 20:24:25',
+                'id' => '7b82cd52-1361-4b11-9f02-29bdaed7c9f2',
+                'created' => '2018-12-19 19:17:47',
+                'modified' => '2018-12-19 19:17:47',
+                'deleted' => '2018-12-19 19:17:47',
                 'email' => 'Lorem ipsum dolor sit amet',
-                'password' => 'Lorem ipsum dolor sit amet'
+                'password' => 'Lorem ipsum dolor sit amet',
+                'permissao' => 1
             ],
         ];
         parent::init();
