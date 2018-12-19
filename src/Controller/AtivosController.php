@@ -56,7 +56,7 @@ class AtivosController extends AppController
     public function view($id = null)
     {
         $ativo = $this->Ativos->get($id, [
-            'contain' => ['Titulos', 'Users', 'Cotacaos']
+            'contain' => ['Titulos', 'Users', 'Cotacaos' => ['sort' => ['Cotacaos.data' => 'DESC']]]
         ]);
 
         $this->set('ativo', $ativo);
