@@ -67,7 +67,7 @@ class AppController extends Controller
             ],
             'loginRedirect' => [
                 'controller' => 'Ativos',
-                'action' => 'index'
+                'action' => 'dashboard'
             ],
              //use isAuthorized in Controllers
             'authorize' => ['Controller'],
