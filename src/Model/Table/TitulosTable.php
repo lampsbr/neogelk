@@ -103,4 +103,13 @@ class TitulosTable extends Table
 
         return $rules;
     }
+    
+    //trimzao do mau
+    public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options){
+        foreach($data as $key => $value){
+            if (is_string($value)) {
+                $data[$key] = trim($value);
+            }
+        }
+    }
 }
