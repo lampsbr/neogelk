@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\I18n\Time;
+use Cake\Http\Client;
 
 /**
  * Cotacaos Controller
@@ -17,7 +18,7 @@ class CotacaosController extends AppController
     public function isAuthorized($user){
         $action = $this->request->getParam('action');
         //por enquanto libera todas ações para quem estiver logado
-        if (in_array($action, ['add', 'quickadd', 'edit', 'index', 'delete', 'view'])) {
+        if (in_array($action, ['add', 'quickadd', 'edit', 'index', 'delete', 'view', 'obtercotacao'])) {
             return true;
         }
         return false;
@@ -95,6 +96,40 @@ class CotacaosController extends AppController
             }
             return $this->redirect(['controller' => 'ativos', 'action' => 'dashboard']);
         }
+    }
+
+    public function obtercotacao($ticker){
+        $chave_api = env('CHAVE_ALPHAVANTAGE', 'DEMO');
+        debug($chave_api);
+        debug($ticker);
+        $ticker = trim(substr($ticker, strpos(strpos($ticker, ':'), '/')));
+        debug($ticker);
+        $url = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=$ticker&apikey=$chave_api";
+        $http = new Client();
+        $response = $http->get($url);
+        debug($response->getJson());
+        $jsonResp = $response->getJson();
+        /*
+        [
+	        'Global Quote' => [
+                '01. symbol' => 'DIS',
+                '02. open' => '108.4800',
+                '03. high' => '108.6500',
+                '04. low' => '105.9436',
+                '05. price' => '106.3300',
+                '06. volume' => '10594588',
+                '07. latest trading day' => '2019-01-03',
+                '08. previous close' => '108.9700',
+                '09. change' => '-2.6400',
+                '10. change percent' => '-2.4227%'
+	        ]
+        ] 
+        */
+        if($jsonResp['Global Quote'])//if is array and has 'price' value, save it and flash success.
+        //ter um catch aqui e um else, o catch sendo geral. Caso dê ruim, exibir mensagem de erro apenas
+        return;
+
+
     }
 
     /**

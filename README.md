@@ -1,6 +1,11 @@
 Adicionar instruções gerais e TODO aqui. =]
 
 //TODO:
+- Adicionar botão ao dashboard para pedir cotação do ticker
+  - tentar limpar o nome do ticker
+  - contactar o alphavantage
+  - caso dê ruim, avisar
+  - caso sucesso, salvar a cotação e avisar ao usr.
 - Ao ativos/add, redirecionar para dashboard ao invés de ativos/index.
 - Todos dropdowns de ativos devem conter seu título e, caso não nulo, seu ticker entre parênteses.
 - Tela DASHBOARD incluir lucro vs inflação

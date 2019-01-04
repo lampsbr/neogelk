@@ -16,6 +16,7 @@ $this->end();
             <th>Lucro</th>
             <th>Lucro no ano</th>
             <th>Últimas cotações</th>
+            <th></th>
             <th class="actions">Ações</th>
         </tr>
     </thead>
@@ -30,6 +31,7 @@ $this->end();
             <td><?= $ativo->lucroTotal.' '.$ativo->lucroPorcento ?></td>
             <td><?= $ativo->lucroNoAno.' '.$ativo->lucroNoAnoPorcento ?></td>
             <td><?= $ativo->ultimasCotacoes ?></td>
+            <td><?= $this->Html->link('pegar cotação', ['controller' => 'cotacaos', 'action' => 'obtercotacao', $ativo->titulo->ticker], ['title' => 'Adicionar ativo']) ?></td>
             <td class="actions">
                 <?php if(empty($ativo->dt_venda)){ ?>
                     <div class="row">
