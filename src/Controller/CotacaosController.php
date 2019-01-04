@@ -4,6 +4,8 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\I18n\Time;
 use Cake\Http\Client;
+use Cake\Core\Configure;
+use Cake\Log\Log;
 
 /**
  * Cotacaos Controller
@@ -98,38 +100,47 @@ class CotacaosController extends AppController
         }
     }
 
-    public function obtercotacao($ticker){
+    private function tratarticker($ticker){
+        if(strpos($ticker, '/')){
+            $ticker = substr($ticker, (strpos($ticker, '/')+1));
+        }        
+        if(strpos($ticker, ':')){
+            $ticker = substr($ticker, (strpos($ticker, ':')+1));
+        }
+        return trim($ticker);
+    }
+
+    public function obtercotacao($idAtivo){
+        $ativo = $this->Cotacaos->Ativos->get($idAtivo, ['contain' => ['Titulos']]);
         $chave_api = env('CHAVE_ALPHAVANTAGE', 'DEMO');
-        debug($chave_api);
-        debug($ticker);
-        $ticker = trim(substr($ticker, strpos(strpos($ticker, ':'), '/')));
-        debug($ticker);
+        $ticker = $this->tratarticker($ativo->titulo->ticker);
         $url = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=$ticker&apikey=$chave_api";
         $http = new Client();
         $response = $http->get($url);
-        debug($response->getJson());
-        $jsonResp = $response->getJson();
-        /*
-        [
-	        'Global Quote' => [
-                '01. symbol' => 'DIS',
-                '02. open' => '108.4800',
-                '03. high' => '108.6500',
-                '04. low' => '105.9436',
-                '05. price' => '106.3300',
-                '06. volume' => '10594588',
-                '07. latest trading day' => '2019-01-03',
-                '08. previous close' => '108.9700',
-                '09. change' => '-2.6400',
-                '10. change percent' => '-2.4227%'
-	        ]
-        ] 
-        */
-        if($jsonResp['Global Quote'])//if is array and has 'price' value, save it and flash success.
-        //ter um catch aqui e um else, o catch sendo geral. Caso dê ruim, exibir mensagem de erro apenas
-        return;
-
-
+        if($response->isOk()){
+            $jsonResp = $response->getJson();
+        
+            //if is array and has 'price' value, save it and flash success.
+            if(is_array($jsonResp['Global Quote']) && isset($jsonResp['Global Quote']['05. price'])){
+                $cotacao = $this->Cotacaos->newEntity();
+                $cotacao->ativo_id = $ativo->id;
+                $cotacao->data = Time::now();
+                $cotacao->valor = $jsonResp['Global Quote']['05. price'];
+                if($this->Cotacaos->save($cotacao)){
+                    $this->Flash->success('Salvamos a cotação mais recente do ativo!');
+                }else{
+                    Log::write('error', $cotacao);
+                    $this->Flash->error('Deu ruim e o auto-cotação não foi salva');
+                }
+            }else{
+                Log::write('error', $jsonResp);
+                $this->Flash->error('Deu ruim e o auto-cotação não funcionou. Erro: '+$response->getBody());
+            }
+        } else{
+            Log::write('error', $response);
+            $this->Flash->error('Deu ruim e o auto-cotação não funcionou.');
+        }
+        return $this->redirect($this->referer());
     }
 
     /**

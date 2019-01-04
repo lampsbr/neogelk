@@ -16,7 +16,6 @@ $this->end();
             <th>Lucro</th>
             <th>Lucro no ano</th>
             <th>Últimas cotações</th>
-            <th></th>
             <th class="actions">Ações</th>
         </tr>
     </thead>
@@ -31,7 +30,6 @@ $this->end();
             <td><?= $ativo->lucroTotal.' '.$ativo->lucroPorcento ?></td>
             <td><?= $ativo->lucroNoAno.' '.$ativo->lucroNoAnoPorcento ?></td>
             <td><?= $ativo->ultimasCotacoes ?></td>
-            <td><?= $this->Html->link('pegar cotação', ['controller' => 'cotacaos', 'action' => 'obtercotacao', $ativo->titulo->ticker], ['title' => 'Adicionar ativo']) ?></td>
             <td class="actions">
                 <?php if(empty($ativo->dt_venda)){ ?>
                     <div class="row">
@@ -42,6 +40,9 @@ $this->end();
                                     <input type="decimal" class="form-control" placeholder="Insira cotação de hoje" required="true" name="valor" size="30">
                                     <span class="input-group-btn">
                                         <button class="btn btn-default" type="submit">Salvar</button>
+                                    </span>
+                                    <span class="input-group-btn">
+                                        <?= $this->Html->link('', ['controller' => 'cotacaos', 'action' => 'obtercotacao', $ativo->id], ['title' => 'Obter cotação recente', 'class' => 'btn btn-default glyphicon glyphicon-refresh']) ?>
                                     </span>
                                 </div>
                             <?= $this->Form->end() ?>
