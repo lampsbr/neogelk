@@ -134,7 +134,7 @@ class CotacaosController extends AppController
                 }
             }else{
                 Log::write('error', $jsonResp);
-                $this->Flash->error('Deu ruim e o auto-cotação não funcionou. Erro: '+$response->getBody());
+                $this->Flash->error('Deu ruim e o auto-cotação não funcionou. Erro: '+$response->getStringBody());
             }
         } else{
             Log::write('error', $response);
