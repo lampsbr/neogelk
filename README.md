@@ -4,7 +4,6 @@ O neogelk é um pequeno webApp criado para acompanhar carteiras de investimentos
 - Tela DASHBOARD incluir lucro vs inflação
 - Implementar índices para comparar os investimentos.
 - Cadastrar tipos, títulos e ativos automaticamente com o login do usr.
-- Só exibir no dropdown de títulos (ativos/add, por exemplo) aqueles com user_id = null ou user_id = usuário logado.
 - Cadastrar dividendos por ativo. Nova tabela (dividendos ou proventos).
 - mostrar moeda ao invés de "dolar" e "real" no saldo.
 - Permitir agrupar ativos de algum jeito. Criar "carteira", "grupo", "corretora" ou algo assim.

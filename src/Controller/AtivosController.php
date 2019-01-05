@@ -79,7 +79,11 @@ class AtivosController extends AppController
             }
             $this->Flash->error(__('The ativo could not be saved. Please, try again.'));
         }
-        $titulos = $this->Ativos->Titulos->find('list', ['limit' => 200]);
+        $titulos = $this->Ativos->Titulos->find('list', ['conditions' => ['OR' => [
+            ['user_id is null'],
+            ['user_id' => $this->Auth->user('id')]
+        ]]]);
+        //$this->Auth->user('id')
         $users = $this->Ativos->Users->find('list', ['limit' => 200]);
         $this->set(compact('ativo', 'titulos', 'users'));
     }
@@ -105,7 +109,10 @@ class AtivosController extends AppController
             }
             $this->Flash->error(__('The ativo could not be saved. Please, try again.'));
         }
-        $titulos = $this->Ativos->Titulos->find('list', ['limit' => 200]);
+        $titulos = $this->Ativos->Titulos->find('list', ['conditions' => ['OR' => [
+            ['user_id is null'],
+            ['user_id' => $this->Auth->user('id')]
+        ]]]);
         $users = $this->Ativos->Users->find('list', ['limit' => 200]);
         $this->set(compact('ativo', 'titulos', 'users'));
     }
