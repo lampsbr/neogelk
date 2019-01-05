@@ -45,4 +45,8 @@ class Titulo extends Entity
         'user' => true,
         'ativos' => true
     ];
+
+    protected function _getNomeCompleto(){
+        return $this->nome.($this->ticker? ' ('.$this->ticker.')' : '');
+    }
 }

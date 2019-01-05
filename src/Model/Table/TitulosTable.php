@@ -40,7 +40,7 @@ class TitulosTable extends Table
         parent::initialize($config);
 
         $this->setTable('titulos');
-        $this->setDisplayField('nome');
+        $this->setDisplayField('nome_completo');
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
