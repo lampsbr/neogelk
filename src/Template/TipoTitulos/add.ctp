@@ -34,7 +34,7 @@ $this->end();
     <legend><?= __('Add {0}', ['Tipo Titulo']) ?></legend>
     <?php
     echo $this->Form->control('descricao');
-    echo $this->Form->control('user_id', ['options' => $users, 'empty' => 'NENHUM']);
+    //echo $this->Form->control('user_id', ['options' => $users, 'empty' => 'NENHUM']);
     ?>
 </fieldset>
 <?= $this->Form->button(__("Add")); ?>

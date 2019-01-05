@@ -41,7 +41,7 @@ $this->end();
     echo $this->Form->control('ticker');
     echo $this->Form->control('tipo_titulo_id', ['options' => $tipoTitulos]);
     echo $this->Form->control('moeda');
-    echo $this->Form->control('user_id', ['options' => $users, 'empty' => 'NENHUM']);
+    //echo $this->Form->control('user_id', ['options' => $users, 'empty' => 'NENHUM']);
     ?>
 </fieldset>
 <?= $this->Form->button(__("Add")); ?>

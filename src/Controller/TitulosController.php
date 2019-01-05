@@ -62,6 +62,7 @@ class TitulosController extends AppController
         $titulo = $this->Titulos->newEntity();
         if ($this->request->is('post')) {
             $titulo = $this->Titulos->patchEntity($titulo, $this->request->getData());
+            $titulo->user_id = $this->Auth->user('id');
             if ($this->Titulos->save($titulo)) {
                 $this->Flash->success(__('The titulo has been saved.'));
 

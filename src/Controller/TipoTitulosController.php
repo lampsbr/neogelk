@@ -63,6 +63,7 @@ class TipoTitulosController extends AppController
         $tipoTitulo = $this->TipoTitulos->newEntity();
         if ($this->request->is('post')) {
             $tipoTitulo = $this->TipoTitulos->patchEntity($tipoTitulo, $this->request->getData());
+            $tipoTitulo->user_id = $this->Auth->user('id');
             if ($this->TipoTitulos->save($tipoTitulo)) {
                 $this->Flash->success(__('The tipo titulo has been saved.'));
 

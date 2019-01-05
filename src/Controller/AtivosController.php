@@ -72,6 +72,7 @@ class AtivosController extends AppController
         $ativo = $this->Ativos->newEntity();
         if ($this->request->is('post')) {
             $ativo = $this->Ativos->patchEntity($ativo, $this->request->getData());
+            $ativo->user_id = $this->Auth->user('id');
             if ($this->Ativos->save($ativo)) {
                 $this->Flash->success(__('The ativo has been saved.'));
 
