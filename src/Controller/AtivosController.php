@@ -75,7 +75,7 @@ class AtivosController extends AppController
             if ($this->Ativos->save($ativo)) {
                 $this->Flash->success(__('The ativo has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'dashboard']);
             }
             $this->Flash->error(__('The ativo could not be saved. Please, try again.'));
         }
@@ -101,7 +101,7 @@ class AtivosController extends AppController
             if ($this->Ativos->save($ativo)) {
                 $this->Flash->success(__('The ativo has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'dashboard']);
             }
             $this->Flash->error(__('The ativo could not be saved. Please, try again.'));
         }
@@ -127,6 +127,6 @@ class AtivosController extends AppController
             $this->Flash->error(__('The ativo could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'dashboard']);
     }
 }

@@ -1,7 +1,6 @@
 Adicionar instruções gerais e TODO aqui. =]
 
 //TODO:
-- Ao ativos/add, redirecionar para dashboard ao invés de ativos/index.
 - Todos dropdowns de ativos devem conter seu título e, caso não nulo, seu ticker entre parênteses.
 - Tela DASHBOARD incluir lucro vs inflação
 - Implementar índices para comparar os investimentos.
