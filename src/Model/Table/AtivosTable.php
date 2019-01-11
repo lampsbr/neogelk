@@ -56,6 +56,9 @@ class AtivosTable extends Table
         $this->hasMany('Cotacaos', [
             'foreignKey' => 'ativo_id'
         ]);
+        $this->hasMany('Proventos', [
+            'foreignKey' => 'ativo_id'
+        ]);
     }
 
     /**

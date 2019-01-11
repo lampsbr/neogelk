@@ -40,7 +40,7 @@ $this->end(); ?>
     <div class="panel panel-default">
         <!-- Panel header -->
         <div class="panel-heading">
-            <h3 class="panel-title"><?= 'Cotações' ?></h3>
+            <h3 class="panel-title">Cotações</h3>
         </div>
         <?php if (!empty($ativo->cotacaos)): ?>
             <table class="table table-striped">
@@ -65,6 +65,41 @@ $this->end(); ?>
             </table>
         <?php else: ?>
             <p class="panel-body">no related Cotacaos</p>
+        <?php endif; ?>
+    </div>
+</div>
+
+<div class="col-sm-6 col-lg-4">
+    <div class="panel panel-default">
+        <!-- Panel header -->
+        <div class="panel-heading">
+            <h3 class="panel-title">Proventos</h3>
+        </div>
+        <?php if (!empty($ativo->proventos)): ?>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Valor total</th>
+                    <th>Obs</th>
+                    <th class="actions"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($ativo->proventos as $prov): ?>
+                    <tr>
+                        <td><?= h($prov->created) ?></td>
+                        <td><?= h($prov->valor_total) ?></td>
+                        <td><?= h($prov->descricao.(isset($prov->valor_individual)?' (valor individual: '.$prov->valor_individual.')':'')) ?></td>
+                        <td class="actions">
+                            <?= $this->Form->postLink('', ['controller' => 'Proventos', 'action' => 'delete', $prov->id], ['confirm' => __('Are you sure you want to delete # {0}?', $cotacaos->id), 'title' => __('Delete'), 'class' => 'btn btn-default glyphicon glyphicon-trash']) ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php else: ?>
+            <p class="panel-body">Sem proventos cadastrados</p>
         <?php endif; ?>
     </div>
 </div>
