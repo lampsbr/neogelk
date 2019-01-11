@@ -49,6 +49,9 @@ class Ativo extends Entity
     protected function _getSaldo(){
         return $this->titulo->moeda.' '.($this->quantidade * $this->valorCotacaoMaisRecente);
     }
+    protected function _getSaldoSemMoeda(){
+        return $this->quantidade * $this->valorCotacaoMaisRecente;
+    }
 
     protected function _getValorCotacaoMaisRecente(){
         if(is_null($this->cotacaos) || empty($this->cotacaos)){

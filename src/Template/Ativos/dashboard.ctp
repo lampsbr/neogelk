@@ -1,4 +1,7 @@
 <?php 
+echo $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js');
+echo $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.5.2/randomColor.min.js');
+
 $this->extend('../Layout/TwitterBootstrap/dashboard'); 
 $this->start('titulo');
 echo 'Dashboard';
@@ -59,3 +62,27 @@ echo 'Saldo atual: '.$saldo;
         <?php endforeach; ?>
     </tbody>
 </table>
+<canvas id="pieGeral"></canvas>
+<script>
+    //var randomColor = require('randomcolor');
+    var qtdCores = <?=json_encode($pieGeralLabels)?>.length;
+    var coresRandom=[];
+    while(qtdCores>0){
+        coresRandom.push(randomColor());
+        qtdCores--;
+    }
+    var ctx = document.getElementById("pieGeral");
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: <?=json_encode($pieGeralLabels)?>,
+            datasets: [{
+                data: <?=json_encode($pieGeralValores)?>,
+                borderWidth: 1,
+                backgroundColor: coresRandom
+            }]
+        },
+        options: {
+        }
+    });
+</script>
