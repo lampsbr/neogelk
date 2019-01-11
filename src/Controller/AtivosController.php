@@ -43,7 +43,32 @@ class AtivosController extends AppController
             ->contain(['Titulos', 'Cotacaos' => ['sort' => ['Cotacaos.data' => 'DESC']]])
             ->order(['dt_venda' => 'asc', 'dt_compra' => 'desc'])
             ->all();
-        $this->set(compact('ativos'));
+        $saldo = $this->formatarSaldos($this->calcularSaldo($ativos));
+        $this->set(compact('ativos', 'saldo'));
+    }
+
+    private function calcularSaldo($ativos){
+        $retorno = [];
+        foreach($ativos as $atv){
+            if(!isset($atv->dt_venda)){
+                $sld = explode(' ',$atv->saldo);
+                if(array_key_exists($sld[0], $retorno)){
+                    $retorno[$sld[0]]+= $sld[1];
+                }else{
+                    $retorno[$sld[0]]= $sld[1];
+                }
+            }
+        }
+        return $retorno;
+    }
+
+    private function formatarSaldos($saldos){
+        $retorno = '';
+        foreach($saldos as $moeda => $sal){
+            if(strlen($retorno)>0) $retorno .=', ';
+            $retorno .= $moeda.' '.$sal;
+        }
+        return $retorno;
     }
 
     /**

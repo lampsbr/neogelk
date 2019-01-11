@@ -4,6 +4,7 @@ $this->start('titulo');
 echo 'Dashboard';
 echo $this->Html->link('', ['action' => 'add'], ['title' => 'Adicionar ativo', 'class' => 'btn btn-default glyphicon glyphicon-plus pull-right']);
 $this->end();
+echo 'Saldo atual: '.$saldo;
 ?>
 <table class="table table-striped" cellpadding="0" cellspacing="0">
     <thead>
