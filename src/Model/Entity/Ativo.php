@@ -136,4 +136,13 @@ class Ativo extends Entity
         }
         return $retorno;
     }
+
+    //somatório de proventos
+    protected function _getTotalProventos(){
+        $ret = 0;
+        foreach($this->proventos as $prov) {
+            $ret += $prov->valor_total;
+        }
+        return $ret;
+    }
 }

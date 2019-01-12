@@ -13,7 +13,7 @@ $this->end(); ?>
         </div>
         <table class="table table-striped" cellpadding="0" cellspacing="0">
             <tr>
-                <td><?= __('Titulo') ?></td>
+                <td>Título</td>
                 <td><?= $ativo->has('titulo') ? $this->Html->link($ativo->titulo->nome, ['controller' => 'Titulos', 'action' => 'view', $ativo->titulo->id]) : '' ?></td>
             </tr>
             <tr>
@@ -25,12 +25,18 @@ $this->end(); ?>
                 <td><?= $this->Number->format($ativo->quantidade) ?></td>
             </tr>
             <tr>
-                <td><?= __('Dt Compra') ?></td>
+                <td>Data de Compra</td>
                 <td><?= $ativo->dt_compra->i18nFormat('yyyy-MM-dd HH:mm:ss') ?></td>
             </tr>
+            <?php if($ativo->dt_venda){ ?>
+                <tr>
+                    <td><?= __('Dt Venda') ?></td>
+                    <td><?= $ativo->dt_venda?$ativo->dt_venda->i18nFormat('yyyy-MM-dd HH:mm:ss'):'' ?></td>
+                </tr>
+            <?php } ?>
             <tr>
-                <td><?= __('Dt Venda') ?></td>
-                <td><?= $ativo->dt_venda?$ativo->dt_venda->i18nFormat('yyyy-MM-dd HH:mm:ss'):'' ?></td>
+                <td>Total de proventos</td>
+                <td><?= $ativo->titulo->moeda.' '.$ativo->total_proventos ?></td>
             </tr>
         </table>
     </div>
