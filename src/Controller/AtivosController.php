@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Datasource\ConnectionManager;
 
 /**
  * Ativos Controller
@@ -43,11 +44,29 @@ class AtivosController extends AppController
             ->contain(['Titulos', 'Cotacaos' => ['sort' => ['Cotacaos.data' => 'DESC']]])
             ->order(['dt_venda' => 'asc', 'dt_compra' => 'desc'])
             ->all();
-
+        $graficoPorMoeda = $this->somaPorMoeda($ativos);
         $saldo = $this->formatarSaldos($this->calcularSaldo($ativos));
         $pieGeralLabels = $this->arrayLabels($ativos);
         $pieGeralValores = $this->arrayValores($ativos);
-        $this->set(compact('ativos', 'saldo', 'pieGeralLabels', 'pieGeralValores'));
+        $this->set(compact('ativos', 'saldo', 'pieGeralLabels', 'pieGeralValores', 'graficoPorMoeda'));
+    }
+
+    /**
+     * Retorna um array contendo o nome da moeda e a soma do valor em carteira para aquela moeda
+     * @since 20190112
+     */
+    private function somaPorMoeda($ativos){
+        $retorno = [];
+        foreach($ativos as $at){
+            if(!isset($at->dt_venda) && sizeof($at->cotacaos)>0){
+                if(!array_key_exists($at->titulo->moeda, $retorno)){
+                    $retorno[$at->titulo->moeda] = $at->valorCotacaoMaisRecente;
+                }else{
+                    $retorno[$at->titulo->moeda]+= $at->valorCotacaoMaisRecente;
+                }
+            }
+        }
+        return $retorno;
     }
 
     private function arrayLabels($ativos){

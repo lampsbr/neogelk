@@ -62,17 +62,23 @@ echo 'Saldo atual: '.$saldo;
         <?php endforeach; ?>
     </tbody>
 </table>
-<canvas id="pieGeral"></canvas>
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+        <canvas id="pieGeral"></canvas>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+        <canvas id="pieMoeda"></canvas>
+    </div>
+</div>
 <script>
-    //var randomColor = require('randomcolor');
     var qtdCores = <?=json_encode($pieGeralLabels)?>.length;
     var coresRandom=[];
     while(qtdCores>0){
         coresRandom.push(randomColor());
         qtdCores--;
     }
-    var ctx = document.getElementById("pieGeral");
-    var myChart = new Chart(ctx, {
+    var pieGeral = document.getElementById("pieGeral");
+    var myChart = new Chart(pieGeral, {
         type: 'pie',
         data: {
             labels: <?=json_encode($pieGeralLabels)?>,
@@ -83,6 +89,42 @@ echo 'Saldo atual: '.$saldo;
             }]
         },
         options: {
+            title: {
+                display: true,
+                text: 'Composição atual da carteira:'
+            },
+            legend: {
+                position: 'bottom'
+            }
+        }
+    });
+
+    let dadosPorMoeda = <?=json_encode($graficoPorMoeda)?>;
+    var qtdCores = Object.values(dadosPorMoeda).length;
+    var coresRandom=[];
+    while(qtdCores>0){
+        coresRandom.push(randomColor());
+        qtdCores--;
+    }
+    var pieMoeda = document.getElementById("pieMoeda");
+    var myChart = new Chart(pieMoeda, {
+        type: 'bar',
+        data: {
+            labels: Object.keys(dadosPorMoeda),
+            datasets: [{
+                data: Object.values(dadosPorMoeda),
+                borderWidth: 1,
+                backgroundColor: coresRandom
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Por moeda:'
+            },
+            legend: {
+                position: 'bottom'
+            }
         }
     });
 </script>
