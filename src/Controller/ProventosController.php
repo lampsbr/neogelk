@@ -45,25 +45,20 @@ class ProventosController extends AppController{
         $this->set('provento', $provento);
     }
 
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
-     */
-    public function add()
-    {
+    public function add($idAtivo){
         $provento = $this->Proventos->newEntity();
         if ($this->request->is('post')) {
             $provento = $this->Proventos->patchEntity($provento, $this->request->getData());
             if ($this->Proventos->save($provento)) {
-                $this->Flash->success(__('The provento has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+                $this->Flash->success('Provento cadastrado');
+                
+                return $this->redirect(['controller' => 'ativos', 'action' => 'view', $provento->ativo_id]);
             }
             $this->Flash->error(__('The provento could not be saved. Please, try again.'));
         }
-        $ativos = $this->Proventos->Ativos->find('list', ['limit' => 200]);
-        $this->set(compact('provento', 'ativos'));
+        $provento->ativo_id = $idAtivo;
+        $provento->ativo = $this->Proventos->Ativos->get($idAtivo, ['contain' => ['Titulos']]);
+        $this->set(compact('provento'));
     }
 
     /**

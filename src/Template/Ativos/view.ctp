@@ -74,6 +74,7 @@ $this->end(); ?>
         <!-- Panel header -->
         <div class="panel-heading">
             <h3 class="panel-title">Proventos</h3>
+            <?php echo $this->Html->link('', ['controller' => 'proventos', 'action' => 'add', $ativo->id], ['title' => 'Cadastrar provento', 'class' => 'btn btn-default glyphicon glyphicon-plus pull-right']); ?>
         </div>
         <?php if (!empty($ativo->proventos)): ?>
             <table class="table table-striped">

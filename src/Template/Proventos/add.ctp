@@ -27,14 +27,13 @@ $this->end();
 ?>
 <?= $this->Form->create($provento); ?>
 <fieldset>
-    <legend><?= __('Add {0}', ['Provento']) ?></legend>
+    <legend>Cadastrar Provento para <?=$provento->ativo->titulo->nome?></legend>
     <?php
-    echo $this->Form->control('deleted');
-    echo $this->Form->control('ativo_id', ['options' => $ativos]);
+    echo $this->Form->hidden('ativo_id');
     echo $this->Form->control('valor_total');
     echo $this->Form->control('descricao');
     echo $this->Form->control('valor_individual');
     ?>
 </fieldset>
-<?= $this->Form->button(__("Add")); ?>
+<?= $this->Form->button('Cadastrar'); ?>
 <?= $this->Form->end() ?>
