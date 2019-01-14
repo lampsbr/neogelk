@@ -44,7 +44,7 @@ class CarteirasController extends AppController
     public function view($id = null)
     {
         $carteira = $this->Carteiras->get($id, [
-            'contain' => ['Ativos']
+            'contain' => ['Ativos' => ['Titulos']]
         ]);
 
         $this->set('carteira', $carteira);

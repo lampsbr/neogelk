@@ -40,9 +40,9 @@ class AtivosController extends AppController
 
     public function dashboard(){
         $ativos = $this->Ativos->find()
-            ->where(['Ativos.user_id' => $this->Auth->user('id')])
-            ->contain(['Titulos', 'Cotacaos' => ['sort' => ['Cotacaos.data' => 'DESC']]])
-            ->order(['dt_venda' => 'asc', 'dt_compra' => 'desc'])
+            ->where(['Ativos.user_id' => $this->Auth->user('id'), 'dt_venda is null'])
+            ->contain(['Titulos','Carteiras', 'Cotacaos' => ['sort' => ['Cotacaos.data' => 'DESC']]])
+            ->order(['carteira_id' => 'asc', 'dt_compra' => 'desc'])
             ->all();
         $graficoPorMoeda = $this->somaPorMoeda($ativos);
         $saldo = $this->formatarSaldos($this->calcularSaldo($ativos));

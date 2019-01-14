@@ -1,7 +1,7 @@
 O neogelk é um pequeno webApp criado para acompanhar carteiras de investimentos.
 
 //TODO:
-- Exibir o dashboard agrupado por carteira.
+- Criar botão n odashboard para exibir ativos já vendidos (histórico/passado).
 - Implementar pie chart por tipo de título. Pegar essas budegas direto do banco.
 - Também ter um pie chart onde cada valor é uma carteira/grupo/corretora.
 - Implementar em ativos/view um chart bar/trend da cotação/saldo total ao longo do tempo.

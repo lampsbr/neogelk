@@ -72,37 +72,19 @@ $this->end();
         <table class="table table-striped">
             <thead>
             <tr>
-                <th><?= __('Id') ?></th>
-                <th><?= __('Created') ?></th>
-                <th><?= __('Modified') ?></th>
-                <th><?= __('Deleted') ?></th>
+                <th>Nome</th>
                 <th><?= __('Dt Compra') ?></th>
                 <th><?= __('Dt Venda') ?></th>
                 <th><?= __('Quantidade') ?></th>
-                <th><?= __('Titulo Id') ?></th>
-                <th><?= __('User Id') ?></th>
-                <th><?= __('Carteira Id') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
             </tr>
             </thead>
             <tbody>
             <?php foreach ($carteira->ativos as $ativos): ?>
                 <tr>
-                    <td><?= h($ativos->id) ?></td>
-                    <td><?= h($ativos->created) ?></td>
-                    <td><?= h($ativos->modified) ?></td>
-                    <td><?= h($ativos->deleted) ?></td>
+                    <td><?= $this->Html->link($ativos->titulo->nome, ['controller' => 'Ativos', 'action' => 'view', $ativos->id], ['title' => 'ver ativo']) ?></td>
                     <td><?= h($ativos->dt_compra) ?></td>
                     <td><?= h($ativos->dt_venda) ?></td>
                     <td><?= h($ativos->quantidade) ?></td>
-                    <td><?= h($ativos->titulo_id) ?></td>
-                    <td><?= h($ativos->user_id) ?></td>
-                    <td><?= h($ativos->carteira_id) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link('', ['controller' => 'Ativos', 'action' => 'view', $ativos->id], ['title' => __('View'), 'class' => 'btn btn-default glyphicon glyphicon-eye-open']) ?>
-                        <?= $this->Html->link('', ['controller' => 'Ativos', 'action' => 'edit', $ativos->id], ['title' => __('Edit'), 'class' => 'btn btn-default glyphicon glyphicon-pencil']) ?>
-                        <?= $this->Form->postLink('', ['controller' => 'Ativos', 'action' => 'delete', $ativos->id], ['confirm' => __('Are you sure you want to delete # {0}?', $ativos->id), 'title' => __('Delete'), 'class' => 'btn btn-default glyphicon glyphicon-trash']) ?>
-                    </td>
                 </tr>
             <?php endforeach; ?>
             </tbody>

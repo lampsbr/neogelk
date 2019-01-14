@@ -13,6 +13,7 @@ echo 'Saldo atual: '.$saldo;
     <thead>
         <tr>
             <th>Título</th>
+            <th>Carteira</th>
             <th>Data de compra</th>
             <th>Data de venda</th>
             <th>Quantidade</th>
@@ -27,6 +28,7 @@ echo 'Saldo atual: '.$saldo;
         <?php foreach ($ativos as $ativo): ?>
         <tr>
         <td><?= $this->Html->link($ativo->titulo->nomeCompleto, ['action' => 'view', $ativo->id], ['title' => 'Detalhes do ativo']) ?></td>
+            <td><?= isset($ativo->carteira)?$ativo->carteira->nome:'' ?></td>
             <td><?= $ativo->dt_compra->i18nFormat('yyyy-MM-dd') ?></td>
             <td><?= $ativo->dt_venda?$ativo->dt_venda->i18nFormat('yyyy-MM-dd'):'' ?></td>
             <td><?= $this->Number->format($ativo->quantidade) ?></td>
