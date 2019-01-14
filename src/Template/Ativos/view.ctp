@@ -17,6 +17,10 @@ $this->end(); ?>
                 <td><?= $ativo->has('titulo') ? $this->Html->link($ativo->titulo->nome, ['controller' => 'Titulos', 'action' => 'view', $ativo->titulo->id]) : '' ?></td>
             </tr>
             <tr>
+                <td>Carteira</td>
+                <td><?= $ativo->has('carteira') ? $this->Html->link($ativo->carteira->nome, ['controller' => 'Carteiras', 'action' => 'view', $ativo->carteira->id]) : '' ?></td>
+            </tr>
+            <tr>
                 <td><?= __('User') ?></td>
                 <td><?= $ativo->has('user') ? $this->Html->link($ativo->user->email, ['controller' => 'Users', 'action' => 'view', $ativo->user->id]) : '' ?></td>
             </tr>

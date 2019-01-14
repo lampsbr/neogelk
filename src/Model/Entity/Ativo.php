@@ -41,6 +41,7 @@ class Ativo extends Entity
         'quantidade' => true,
         'titulo_id' => true,
         'user_id' => true,
+        'carteira_id' => true,
         'titulo' => true,
         'user' => true
     ];

@@ -60,9 +60,9 @@ class AtivosController extends AppController
         foreach($ativos as $at){
             if(!isset($at->dt_venda) && sizeof($at->cotacaos)>0){
                 if(!array_key_exists($at->titulo->moeda, $retorno)){
-                    $retorno[$at->titulo->moeda] = $at->valorCotacaoMaisRecente;
+                    $retorno[$at->titulo->moeda] = $at->saldoSemMoeda;
                 }else{
-                    $retorno[$at->titulo->moeda]+= $at->valorCotacaoMaisRecente;
+                    $retorno[$at->titulo->moeda]+= $at->saldoSemMoeda;
                 }
             }
         }
@@ -125,6 +125,7 @@ class AtivosController extends AppController
             'contain' => [
                 'Titulos', 
                 'Users', 
+                'Carteiras',
                 'Cotacaos' => ['sort' => ['Cotacaos.data' => 'DESC']], 
                 'Proventos' => ['sort' => ['Proventos.created' => 'DESC']]
             ]
@@ -155,9 +156,10 @@ class AtivosController extends AppController
             ['user_id is null'],
             ['user_id' => $this->Auth->user('id')]
         ]]]);
+        $carteiras = $this->Ativos->Carteiras->find('list', ['conditions' => ['user_id' => $this->Auth->user('id')]]);
         //$this->Auth->user('id')
         $users = $this->Ativos->Users->find('list', ['limit' => 200]);
-        $this->set(compact('ativo', 'titulos', 'users'));
+        $this->set(compact('ativo', 'titulos', 'users', 'carteiras'));
     }
 
     /**
@@ -185,8 +187,9 @@ class AtivosController extends AppController
             ['user_id is null'],
             ['user_id' => $this->Auth->user('id')]
         ]]]);
+        $carteiras = $this->Ativos->Carteiras->find('list', ['conditions' => ['user_id' => $this->Auth->user('id')]]);
         $users = $this->Ativos->Users->find('list', ['limit' => 200]);
-        $this->set(compact('ativo', 'titulos', 'users'));
+        $this->set(compact('ativo', 'titulos', 'users', 'carteiras'));
     }
 
     /**

@@ -50,7 +50,8 @@ $this->start('tb_sidebar');
     echo $this->Form->control('dt_venda',['empty' => true]);
     echo $this->Form->control('quantidade');
     echo $this->Form->control('titulo_id', ['options' => $titulos]);
-    echo $this->Form->control('user_id', ['options' => $users]);
+    echo $this->Form->control('carteira_id', ['options' => $carteiras]);
+    echo $this->Form->hidden('user_id');
     ?>
 </fieldset>
 <?= $this->Form->button(__("Save")); ?>

@@ -53,6 +53,7 @@ class AtivosTable extends Table
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
+        $this->belongsTo('Carteiras');
         $this->hasMany('Cotacaos', [
             'foreignKey' => 'ativo_id'
         ]);
