@@ -1,4 +1,7 @@
 <?php
+echo $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js');
+echo $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.5.2/randomColor.min.js');
+
 $this->extend('../Layout/TwitterBootstrap/dashboard');
 $this->start('titulo');
 echo 'Detalhes de ativo'; 
@@ -114,3 +117,41 @@ $this->end(); ?>
         <?php endif; ?>
     </div>
 </div>
+<div class="col-sm-12 col-lg-6">
+    <canvas id="grafAtivo"></canvas>
+</div>
+<script>
+let cotacoes = <?=json_encode($ativo->cotacaos)?>;
+cotacoes = cotacoes.reverse();
+let proventos = <?=json_encode($ativo->proventos)?>;
+let qtd = <?=json_encode($ativo->quantidade)?>;
+console.log(cotacoes);
+console.log(proventos);
+console.log(qtd);
+
+var grafAtivo = document.getElementById("grafAtivo");
+    var myChart = new Chart(grafAtivo, {
+        type: 'line',
+        data: {
+            labels: cotacoes.map(obj => obj.data.substring(0,10)),
+            datasets: [{
+                data: cotacoes.map(obj => obj.valor*qtd),
+                borderWidth: 1,
+
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+
+</script>

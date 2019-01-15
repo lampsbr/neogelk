@@ -118,7 +118,7 @@ echo 'Saldo atual: '.$saldo;
         qtdCores--;
     }
     var pieMoeda = document.getElementById("pieMoeda");
-    var myChart = new Chart(pieMoeda, {
+    var myChart2 = new Chart(pieMoeda, {
         type: 'bar',
         data: {
             labels: Object.keys(dadosPorMoeda),
@@ -149,7 +149,7 @@ echo 'Saldo atual: '.$saldo;
         qtdCores--;
     }
     var pieTipoTitulo = document.getElementById("pieTipoTitulo");
-    var myChart = new Chart(pieTipoTitulo, {
+    var myChart3 = new Chart(pieTipoTitulo, {
         type: 'pie',
         data: {
             labels: dadosPorTipoTitulo.map(obj => obj.descricao),
@@ -180,7 +180,7 @@ echo 'Saldo atual: '.$saldo;
         qtdCores--;
     }
     var pieCarteira = document.getElementById("pieCarteira");
-    var myChart = new Chart(pieCarteira, {
+    var myChart4 = new Chart(pieCarteira, {
         type: 'pie',
         data: {
             labels: dadosPorCarteira.map(obj => obj.cartnome),
