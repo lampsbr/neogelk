@@ -49,7 +49,9 @@ class AtivosController extends AppController
         $pieGeralLabels = $this->arrayLabels($ativos);
         $pieGeralValores = $this->arrayValores($ativos);
         $somaPorTipo = $this->somaPorTipo();
-        $this->set(compact('ativos', 'saldo', 'pieGeralLabels', 'pieGeralValores', 'graficoPorMoeda', 'somaPorTipo'));
+        $somaPorCarteira = $this->somaPorCarteira();
+        $this->set(compact('ativos', 'saldo', 'pieGeralLabels', 'pieGeralValores', 'graficoPorMoeda', 
+        'somaPorTipo', 'somaPorCarteira'));
     }
 
     /**
@@ -87,6 +89,39 @@ class AtivosController extends AppController
         return $results;
     }
 
+    /**
+     * Retorna o saldo do usuário por carteira.
+     * @since 20190115
+     */
+    private function somaPorCarteira(){
+        $connection = ConnectionManager::get('default');
+        $results = $connection->execute('select consulta.cartnome, SUM(consulta.saldoatual) as saldoatual
+        from 
+        (
+        select u.id, cart.nome as cartnome, t.nome, (cotacaoatual.valor * a.quantidade) as saldoatual
+        from carteiras cart
+        join ativos a
+          on cart.id = a.carteira_id
+        join titulos t
+          on a.titulo_id = t.id
+        join users u
+          on u.id = a.user_id
+        join
+            (select c.ativo_id, c.valor from cotacaos c
+            Join
+            (
+              select ativo_id, max(data) as maxdata
+              from cotacaos
+              group by ativo_id
+            ) maxdtct
+            on c.data = maxdtct.maxdata
+                and c.ativo_id = maxdtct.ativo_id) cotacaoatual
+          on cotacaoatual.ativo_id = a.id
+        where a.user_id = \''.$this->Auth->user('id').'\'  
+        and a.dt_venda is null) consulta
+        group by consulta.cartnome')->fetchAll('assoc');
+        return $results;
+    }
     /**
      * Retorna um array contendo o nome da moeda e a soma do valor em carteira para aquela moeda
      * @since 20190112

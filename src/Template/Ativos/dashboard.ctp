@@ -74,6 +74,9 @@ echo 'Saldo atual: '.$saldo;
     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
         <canvas id="pieTipoTitulo"></canvas>
     </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+        <canvas id="pieCarteira"></canvas>
+    </div>
 </div>
 <script>
     //grafico por papel
@@ -166,4 +169,36 @@ echo 'Saldo atual: '.$saldo;
             }
         }
     });
+    //FIM DE gráfico por tipo de título
+
+    //grafico por carteira
+    let dadosPorCarteira = <?=json_encode($somaPorCarteira)?>;
+    var qtdCores = dadosPorCarteira.length;
+    var coresRandom=[];
+    while(qtdCores>0){
+        coresRandom.push(randomColor());
+        qtdCores--;
+    }
+    var pieCarteira = document.getElementById("pieCarteira");
+    var myChart = new Chart(pieCarteira, {
+        type: 'pie',
+        data: {
+            labels: dadosPorCarteira.map(obj => obj.cartnome),
+            datasets: [{
+                data: dadosPorCarteira.map(obj => obj.saldoatual),
+                borderWidth: 1,
+                backgroundColor: coresRandom
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Por tipo:'
+            },
+            legend: {
+                display: false
+            }
+        }
+    });
+    //FIM DE gráfico por tipo de título
 </script>
