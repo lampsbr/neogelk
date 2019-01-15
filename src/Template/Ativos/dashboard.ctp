@@ -71,8 +71,12 @@ echo 'Saldo atual: '.$saldo;
     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
         <canvas id="pieMoeda"></canvas>
     </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+        <canvas id="pieTipoTitulo"></canvas>
+    </div>
 </div>
 <script>
+    //grafico por papel
     var qtdCores = <?=json_encode($pieGeralLabels)?>.length;
     var coresRandom=[];
     while(qtdCores>0){
@@ -96,11 +100,13 @@ echo 'Saldo atual: '.$saldo;
                 text: 'Composição atual da carteira:'
             },
             legend: {
-                position: 'bottom'
+                display: false
             }
         }
     });
+    //FIM DE grafico por papel
 
+    //grafico por moeda
     let dadosPorMoeda = <?=json_encode($graficoPorMoeda)?>;
     var qtdCores = Object.values(dadosPorMoeda).length;
     var coresRandom=[];
@@ -125,7 +131,38 @@ echo 'Saldo atual: '.$saldo;
                 text: 'Por moeda:'
             },
             legend: {
-                position: 'bottom'
+                display: false
+            }
+        }
+    });
+    //FIM DE grafico por moeda
+
+    //grafico por tipo de título
+    let dadosPorTipoTitulo = <?=json_encode($somaPorTipo)?>;
+    var qtdCores = dadosPorTipoTitulo.length;
+    var coresRandom=[];
+    while(qtdCores>0){
+        coresRandom.push(randomColor());
+        qtdCores--;
+    }
+    var pieTipoTitulo = document.getElementById("pieTipoTitulo");
+    var myChart = new Chart(pieTipoTitulo, {
+        type: 'pie',
+        data: {
+            labels: dadosPorTipoTitulo.map(obj => obj.descricao),
+            datasets: [{
+                data: dadosPorTipoTitulo.map(obj => obj.saldoatual),
+                borderWidth: 1,
+                backgroundColor: coresRandom
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Por tipo:'
+            },
+            legend: {
+                display: false
             }
         }
     });

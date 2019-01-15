@@ -48,7 +48,43 @@ class AtivosController extends AppController
         $saldo = $this->formatarSaldos($this->calcularSaldo($ativos));
         $pieGeralLabels = $this->arrayLabels($ativos);
         $pieGeralValores = $this->arrayValores($ativos);
-        $this->set(compact('ativos', 'saldo', 'pieGeralLabels', 'pieGeralValores', 'graficoPorMoeda'));
+        $somaPorTipo = $this->somaPorTipo();
+        $this->set(compact('ativos', 'saldo', 'pieGeralLabels', 'pieGeralValores', 'graficoPorMoeda', 'somaPorTipo'));
+    }
+
+    /**
+     * Retorna o saldo do usuário por tipo de título.
+     * @author Braulio
+     * @since 20190115
+     */
+    private function somaPorTipo(){
+        $connection = ConnectionManager::get('default');
+        $results = $connection->execute('select consulta.descricao, SUM(consulta.saldoatual) as saldoatual
+        from 
+        (
+        select u.id, tt.descricao, t.nome, (cotacaoatual.valor * a.quantidade) as saldoatual
+        from tipo_titulos tt
+        join titulos t
+          on tt.id = t.tipo_titulo_id
+        join ativos a
+          on t.id = a.titulo_id
+        join users u
+          on u.id = a.user_id
+        join
+            (select c.ativo_id, c.valor from cotacaos c
+            Join
+            (
+              select ativo_id, max(data) as maxdata
+              from cotacaos
+              group by ativo_id
+            ) maxdtct
+            on c.data = maxdtct.maxdata
+                and c.ativo_id = maxdtct.ativo_id) cotacaoatual
+          on cotacaoatual.ativo_id = a.id
+        where a.user_id = \''.$this->Auth->user('id').'\' 
+        and a.dt_venda is null) consulta
+        group by consulta.descricao')->fetchAll('assoc');
+        return $results;
     }
 
     /**
