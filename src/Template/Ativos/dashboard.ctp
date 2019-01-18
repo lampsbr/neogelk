@@ -191,7 +191,7 @@ echo 'Saldo atual: '.$saldo;
         options: {
             title: {
                 display: true,
-                text: 'Por tipo:'
+                text: 'Por carteira:'
             },
             legend: {
                 display: false
