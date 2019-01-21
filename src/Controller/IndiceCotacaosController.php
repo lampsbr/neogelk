@@ -3,7 +3,15 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
-class IndiceCotacaosController extends AppController{
+/**
+ * IndiceCotacaos Controller
+ *
+ * @property \App\Model\Table\IndiceCotacaosTable $IndiceCotacaos
+ *
+ * @method \App\Model\Entity\IndiceCotacao[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ */
+class IndiceCotacaosController extends AppController
+{
 
     public function isAuthorized($user){
         $action = $this->request->getParam('action');

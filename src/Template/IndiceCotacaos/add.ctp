@@ -30,7 +30,7 @@ $this->end();
     <legend><?= __('Add {0}', ['Indice Cotacao']) ?></legend>
     <?php
     echo $this->Form->control('valor');
-    echo $this->Form->control('indices_id', ['options' => $indices]);
+    echo $this->Form->control('indice_id', ['options' => $indices]);
     ?>
 </fieldset>
 <?= $this->Form->button(__("Add")); ?>

@@ -17,7 +17,7 @@ $this->start('tb_actions');
             <th><?= $this->Paginator->sort('modified'); ?></th>
             <th><?= $this->Paginator->sort('deleted'); ?></th>
             <th><?= $this->Paginator->sort('valor'); ?></th>
-            <th><?= $this->Paginator->sort('indices_id'); ?></th>
+            <th><?= $this->Paginator->sort('indice_id'); ?></th>
             <th class="actions"><?= __('Actions'); ?></th>
         </tr>
     </thead>

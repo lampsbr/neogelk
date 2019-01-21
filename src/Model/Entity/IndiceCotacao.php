@@ -11,7 +11,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime|null $modified
  * @property \Cake\I18n\FrozenTime|null $deleted
  * @property float $valor
- * @property string $indices_id
+ * @property string $indice_id
  *
  * @property \App\Model\Entity\Index $index
  */
@@ -32,7 +32,7 @@ class IndiceCotacao extends Entity
         'modified' => true,
         'deleted' => true,
         'valor' => true,
-        'indices_id' => true,
+        'indice_id' => true,
         'index' => true
     ];
 }

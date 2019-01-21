@@ -3,8 +3,15 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
-class IndicesController extends AppController{
-
+/**
+ * Indices Controller
+ *
+ * @property \App\Model\Table\IndicesTable $Indices
+ *
+ * @method \App\Model\Entity\Index[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ */
+class IndicesController extends AppController
+{
     public function isAuthorized($user){
         $action = $this->request->getParam('action');
         //por enquanto libera todas ações para quem estiver logado

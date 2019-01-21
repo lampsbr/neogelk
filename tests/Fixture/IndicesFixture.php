@@ -42,10 +42,10 @@ class IndicesFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => '4381b16a-e9bb-4b7e-b934-f660c2e2d5ef',
-                'created' => '2019-01-21 20:04:45',
-                'modified' => '2019-01-21 20:04:45',
-                'deleted' => '2019-01-21 20:04:45',
+                'id' => '96b98866-bd27-44d2-9b7e-9e1d9a779534',
+                'created' => '2019-01-21 22:13:18',
+                'modified' => '2019-01-21 22:13:18',
+                'deleted' => '2019-01-21 22:13:18',
                 'nome' => 'Lorem ipsum dolor sit amet',
                 'descricao' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.'
             ],

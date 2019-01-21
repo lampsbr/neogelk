@@ -42,7 +42,7 @@ class IndiceCotacaosTable extends Table
         $this->addBehavior('Timestamp');
 
         $this->belongsTo('Indices', [
-            'foreignKey' => 'indices_id',
+            'foreignKey' => 'indice_id',
             'joinType' => 'INNER'
         ]);
     }
@@ -80,7 +80,7 @@ class IndiceCotacaosTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['indices_id'], 'Indices'));
+        $rules->add($rules->existsIn(['indice_id'], 'Indices'));
 
         return $rules;
     }

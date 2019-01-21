@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Datasource\ConnectionManager;
+use Cake\I18n\Time;
 
 /**
  * Ativos Controller
@@ -44,6 +45,9 @@ class AtivosController extends AppController
             ->contain(['Titulos','Carteiras', 'Cotacaos' => ['sort' => ['Cotacaos.data' => 'DESC']]])
             ->order(['carteira_id' => 'asc', 'dt_compra' => 'desc'])
             ->all();
+        //converter saldos para moeda padrão do usuário e guardar em cada ativo
+        $ativos = $this->converterMoeda($ativos);
+
         $graficoPorMoeda = $this->somaPorMoeda($ativos);
         $saldo = $this->formatarSaldos($this->calcularSaldo($ativos));
         $pieGeralLabels = $this->arrayLabels($ativos);
@@ -54,6 +58,10 @@ class AtivosController extends AppController
         'somaPorTipo', 'somaPorCarteira'));
     }
 
+    /**
+     * Exibe ativos já vendidos.
+     * @since 20190121
+     */
     public function arquivo(){
         $ativos = $this->Ativos->find()
             ->where(['Ativos.user_id' => $this->Auth->user('id'), 'dt_venda is not null'])
@@ -62,6 +70,36 @@ class AtivosController extends AppController
             ->all();
         $this->set(compact('ativos'));
     }
+
+    /**
+     * Pega a moeda padrão e gera saldo para todos ativos naquela moeda padrão.
+     * @since 20190121
+     */
+    private function converterMoeda($ativos){
+        //pegar moeda do usuário
+        $moedaPadrao = $this->Auth->user('moeda');
+        $this->loadModel('IndiceCotacaos');
+        
+        foreach ($ativos as $ativo) {
+            //se moedaPadrao !== moeda do ativo->titulo,
+            if($moedaPadrao !== $ativo->titulo->moeda){
+                //pegar cotação mais recente do índice moedaTitulo (em moedaPadrao)
+                $cotacao = $this->IndiceCotacaos->find()->contain(['Indices'])->where([
+                    'Indices.nome' => $ativo->titulo->moeda.' (em '.$moedaPadrao.')',
+                    'IndiceCotacaos.created <=' => Time::now()
+                ])->order(['IndiceCotacaos.created' => 'DESC'])->first();
+                //$ativo->saldoMoeda = $ativo->saldo * cotação
+                if($cotacao){
+                    $ativo->saldoMoeda = $ativo->saldoSemMoeda * $cotacao->valor;
+                }
+            } else{
+                //else $ativo->saldoMoeda = $ativo->saldo
+                $ativo->saldoMoeda = $ativo->saldoSemMoeda;
+            }
+        }
+        return $ativos;
+    }
+
     /**
      * Retorna o saldo do usuário por tipo de título.
      * @author Braulio
@@ -169,6 +207,7 @@ class AtivosController extends AppController
 
     private function calcularSaldo($ativos){
         $retorno = [];
+        //gerar saldos por moeda
         foreach($ativos as $atv){
             if(!isset($atv->dt_venda)){
                 $sld = explode(' ',$atv->saldo);
@@ -179,6 +218,14 @@ class AtivosController extends AppController
                 }
             }
         }
+        //gerar saldo total
+        $retorno['total'] = 0;
+        foreach($ativos as $atv){
+            if($atv->saldoMoeda){
+                $retorno['total']+= $atv->saldoMoeda;
+            }
+        }
+
         return $retorno;
     }
 
