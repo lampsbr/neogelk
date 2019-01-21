@@ -17,7 +17,7 @@ class AtivosController extends AppController
     public function isAuthorized($user){
         $action = $this->request->getParam('action');
         //por enquanto libera todas ações para quem estiver logado
-        if (in_array($action, ['add', 'edit', 'index', 'delete', 'view', 'dashboard'])) {
+        if (in_array($action, ['add', 'edit', 'index', 'delete', 'view', 'dashboard', 'arquivo'])) {
             return true;
         }
         return false;
@@ -54,6 +54,14 @@ class AtivosController extends AppController
         'somaPorTipo', 'somaPorCarteira'));
     }
 
+    public function arquivo(){
+        $ativos = $this->Ativos->find()
+            ->where(['Ativos.user_id' => $this->Auth->user('id'), 'dt_venda is not null'])
+            ->contain(['Titulos','Carteiras', 'Cotacaos' => ['sort' => ['Cotacaos.data' => 'DESC']]])
+            ->order(['carteira_id' => 'asc', 'dt_compra' => 'desc'])
+            ->all();
+        $this->set(compact('ativos'));
+    }
     /**
      * Retorna o saldo do usuário por tipo de título.
      * @author Braulio

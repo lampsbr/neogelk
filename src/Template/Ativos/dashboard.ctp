@@ -62,6 +62,10 @@ echo 'Saldo atual: '.$saldo;
         <?php endforeach; ?>
     </tbody>
 </table>
+<?php 
+echo $this->Html->link(' Ver arquivo', ['action' => 'arquivo'], ['class' => 'btn btn-default glyphicon glyphicon-compressed']);
+?>
+<br/>
 <div class="row">
     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
         <canvas id="pieGeral"></canvas>

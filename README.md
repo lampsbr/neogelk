@@ -20,3 +20,4 @@ O neogelk é um pequeno webApp criado para acompanhar carteiras de investimentos
 - https://github.com/FriendsOfCake/bootstrap-ui/blob/master/README.md (dicas de layout do plugin bolado com bootstrap 3)
 - https://book.cakephp.org/3.0/en/deployment.html (como dar deploy da bagaça)
 - https://github.com/PGBI/cakephp3-soft-delete (plugin de softdelete que uso)
+- https://stackoverflow.com/questions/17873763/db-backup-function-in-cakephp (dar dump do BD)
