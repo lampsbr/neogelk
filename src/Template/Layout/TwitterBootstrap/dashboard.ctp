@@ -25,7 +25,6 @@ $this->start('tb_body_start');
                 
                 <ul class="nav navbar-nav navbar-right">
                     <li class="nav-divider"></li>
-                    <li><?= $this->Html->link('Dashboard', ['controller' => 'ativos', 'action' => 'dashboard']) ?> </li>
                     <!--
                     <li><?= $this->Html->link(__('Ativos'), ['controller' => 'ativos', 'action' => 'index']) ?> </li>
                     <li><?= $this->Html->link(__('Cotações'), ['controller' => 'cotacaos', 'action' => 'index']) ?> </li>
