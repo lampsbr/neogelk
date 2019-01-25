@@ -16,7 +16,7 @@ $this->start('tb_body_start');
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/ativos/dashboard">neoGELK</a>
+                <?= $this->Html->link('neoGELK', ['controller' => 'ativos', 'action' => 'dashboard'], ['class' => 'navbar-brand']) ?>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right visible-xs">
