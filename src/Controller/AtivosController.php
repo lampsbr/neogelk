@@ -107,10 +107,11 @@ class AtivosController extends AppController
      */
     private function somaPorTipo(){
         $connection = ConnectionManager::get('default');
-        $results = $connection->execute('select consulta.descricao, SUM(consulta.saldoatual) as saldoatual
+        $results = $connection->execute(
+        'select consulta.descricao, SUM(consulta.saldoatual) as saldoatual
         from 
         (
-        select u.id, tt.descricao, t.nome, (cotacaoatual.valor * a.quantidade) as saldoatual
+        select u.id, tt.descricao, t.nome, if(t.moeda = \'dolar\', (cotacaoatual.valor * a.quantidade) * 3.78, (cotacaoatual.valor * a.quantidade)) as saldoatual
         from tipo_titulos tt
         join titulos t
           on tt.id = t.tipo_titulo_id
@@ -130,8 +131,12 @@ class AtivosController extends AppController
                 and c.ativo_id = maxdtct.ativo_id) cotacaoatual
           on cotacaoatual.ativo_id = a.id
         where a.user_id = \''.$this->Auth->user('id').'\' 
-        and a.dt_venda is null) consulta
-        group by consulta.descricao')->fetchAll('assoc');
+        and a.dt_venda is null
+        
+        ) consulta
+        group by consulta.descricao'
+        
+        )->fetchAll('assoc');
         return $results;
     }
 
