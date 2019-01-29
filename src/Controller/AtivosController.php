@@ -190,7 +190,7 @@ class AtivosController extends AppController
         $ret = [];
         foreach($ativos as $atv){
             if(!isset($atv->dt_venda)){
-                array_push($ret, $atv->titulo->nome.' ('.$atv->titulo->moeda.')');
+                array_push($ret, $atv->titulo->nome);
             }
         }
         return $ret;
@@ -199,7 +199,7 @@ class AtivosController extends AppController
         $ret = [];
         foreach($ativos as $atv){
             if(!isset($atv->dt_venda)){
-                array_push($ret, $atv->saldoSemMoeda);
+                array_push($ret, $atv->saldoMoeda);
             }
         }
         return $ret;
