@@ -149,7 +149,7 @@ class AtivosController extends AppController
         $results = $connection->execute('select consulta.cartnome, SUM(consulta.saldoatual) as saldoatual
         from 
         (
-        select u.id, cart.nome as cartnome, t.nome, (cotacaoatual.valor * a.quantidade) as saldoatual
+        select u.id, cart.nome as cartnome, t.nome, if(t.moeda = \'dolar\', (cotacaoatual.valor * a.quantidade) * 3.78, (cotacaoatual.valor * a.quantidade)) as saldoatual
         from carteiras cart
         join ativos a
           on cart.id = a.carteira_id
