@@ -214,6 +214,7 @@ class AtivosController extends AppController
         $retorno = [];
         //gerar saldos por moeda
         foreach($ativos as $atv){
+            //apenas calcular o saldo do que não tiver sido vendido ainda, ou seja, o que estiver na carteira
             if(!isset($atv->dt_venda)){
                 $sld = explode(' ',$atv->saldo);
                 if(array_key_exists($sld[0], $retorno)){
@@ -238,9 +239,20 @@ class AtivosController extends AppController
         $retorno = '';
         foreach($saldos as $moeda => $sal){
             if(strlen($retorno)>0) $retorno .=', ';
-            $retorno .= $moeda.' '.$sal;
+            $retorno .= $this->formatarMoeda($moeda).' '.$sal;
         }
         return $retorno;
+    }
+
+    /**
+     * Gatinho simples para exibir moedas de modo mais belo, quando possível
+     * @since 20190624
+     */
+    private function formatarMoeda($mo){
+        if($mo==='dolar') return 'US$';
+        if($mo==='real') return 'R$';
+        if($mo==='total') return 'Total R$';
+        return $mo;
     }
 
     /**
