@@ -83,14 +83,9 @@ class AtivosController extends AppController
         foreach ($ativos as $ativo) {
             //se moedaPadrao !== moeda do ativo->titulo,
             if($moedaPadrao !== $ativo->titulo->moeda){
-                //pegar cotação mais recente do índice moedaTitulo (em moedaPadrao)
-                $cotacao = $this->IndiceCotacaos->find()->contain(['Indices'])->where([
-                    'Indices.nome' => $ativo->titulo->moeda.' (em '.$moedaPadrao.')',
-                    'IndiceCotacaos.created <=' => Time::now()
-                ])->order(['IndiceCotacaos.created' => 'DESC'])->first();
-                //$ativo->saldoMoeda = $ativo->saldo * cotação
+                $cotacao = $this->cotacaoMaisRecenteEmReal($ativo->titulo->moeda);
                 if($cotacao){
-                    $ativo->saldoMoeda = $ativo->saldoSemMoeda * $cotacao->valor;
+                    $ativo->saldoMoeda = $ativo->saldoSemMoeda * $cotacao;
                 }
             } else{
                 //else $ativo->saldoMoeda = $ativo->saldo
@@ -101,17 +96,32 @@ class AtivosController extends AppController
     }
 
     /**
+     * Pegar a cotação mais recente do índice $moeda (em real)
+     * @since 20190713
+     */
+    private function cotacaoMaisRecenteEmReal($moeda){
+        $cotacao = $this->IndiceCotacaos->find()->contain(['Indices'])->where([
+            'Indices.nome' => $moeda.' (em real)',
+            'IndiceCotacaos.created <=' => Time::now()
+            ])->order(['IndiceCotacaos.created' => 'DESC'])->first();
+        if($cotacao)
+            return $cotacao->valor;
+        return 0;
+    }
+
+    /**
      * Retorna o saldo do usuário por tipo de título.
      * @author Braulio
      * @since 20190115
      */
     private function somaPorTipo(){
+        $cotacaoDolar = $this->cotacaoMaisRecenteEmReal('dolar');
         $connection = ConnectionManager::get('default');
         $results = $connection->execute(
         'select consulta.descricao, SUM(consulta.saldoatual) as saldoatual
         from 
         (
-        select u.id, tt.descricao, t.nome, if(t.moeda = \'dolar\', (cotacaoatual.valor * a.quantidade) * 3.78, (cotacaoatual.valor * a.quantidade)) as saldoatual
+        select u.id, tt.descricao, t.nome, if(t.moeda = \'dolar\', (cotacaoatual.valor * a.quantidade) * '.$cotacaoDolar.', (cotacaoatual.valor * a.quantidade)) as saldoatual
         from tipo_titulos tt
         join titulos t
           on tt.id = t.tipo_titulo_id
@@ -145,11 +155,12 @@ class AtivosController extends AppController
      * @since 20190115
      */
     private function somaPorCarteira(){
+        $cotacaoDolar = $this->cotacaoMaisRecenteEmReal('dolar');
         $connection = ConnectionManager::get('default');
         $results = $connection->execute('select consulta.cartnome, SUM(consulta.saldoatual) as saldoatual
         from 
         (
-        select u.id, cart.nome as cartnome, t.nome, if(t.moeda = \'dolar\', (cotacaoatual.valor * a.quantidade) * 3.78, (cotacaoatual.valor * a.quantidade)) as saldoatual
+        select u.id, cart.nome as cartnome, t.nome, if(t.moeda = \'dolar\', (cotacaoatual.valor * a.quantidade) * '.$cotacaoDolar.', (cotacaoatual.valor * a.quantidade)) as saldoatual
         from carteiras cart
         join ativos a
           on cart.id = a.carteira_id
