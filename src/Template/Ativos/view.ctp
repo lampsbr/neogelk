@@ -7,6 +7,7 @@ $this->start('titulo');
 echo 'Detalhes de ativo'; 
 echo $this->Form->postLink('', ['action' => 'delete', $ativo->id], ['confirm' => __('Are you sure you want to delete # {0}?', $ativo->titulo->nome), 'title' => 'Apagar', 'class' => 'btn btn-default glyphicon glyphicon-trash pull-right']);
 echo $this->Html->link('', ['action' => 'edit', $ativo->id], ['title' => 'Editar', 'class' => 'btn btn-default glyphicon glyphicon-pencil pull-right']);
+echo $this->Html->link('', ['controller' => 'Operacaos','action' => 'add', $ativo->id], ['title' => 'Fazer operação', 'class' => 'btn btn-default glyphicon glyphicon-sort pull-right']);
 $this->end(); ?>
 <div class="col-sm-6 col-lg-4">
     <div class="panel panel-default">
@@ -117,6 +118,36 @@ $this->end(); ?>
         <?php endif; ?>
     </div>
 </div>
+
+<div class="col-sm-6 col-lg-4">
+    <div class="panel panel-default">
+        <!-- Panel header -->
+        <div class="panel-heading">
+            <h3 class="panel-title">Operações</h3>
+            <?php echo $this->Html->link('', ['controller' => 'operacaos', 'action' => 'add', $ativo->id], ['title' => 'Cadastrar operação', 'class' => 'btn btn-default glyphicon glyphicon-plus pull-right']); ?>
+        </div>
+        <?php if (!empty($ativo->operacaos)): ?>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Quantidade</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($ativo->operacaos as $prov): ?>
+                    <tr>
+                        <td><?= h($prov->created) ?></td>
+                        <td><?= h($prov->quantidade) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php else: ?>
+            <p class="panel-body">Sem operações cadastradas</p>
+        <?php endif; ?>
+    </div>
+</div>
 <div class="col-sm-12 col-lg-6">
     <canvas id="grafAtivo"></canvas>
 </div>
@@ -137,7 +168,6 @@ var grafAtivo = document.getElementById("grafAtivo");
             datasets: [{
                 data: cotacoes.map(obj => obj.valor*qtd),
                 borderWidth: 1,
-
             }]
         },
         options: {

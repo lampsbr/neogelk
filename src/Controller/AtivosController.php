@@ -281,6 +281,7 @@ class AtivosController extends AppController
                 'Users', 
                 'Carteiras',
                 'Cotacaos' => ['sort' => ['Cotacaos.data' => 'DESC']], 
+                'Operacaos' => ['sort' => ['Operacaos.created' => 'DESC']], 
                 'Proventos' => ['sort' => ['Proventos.created' => 'DESC']]
             ]
         ]);
