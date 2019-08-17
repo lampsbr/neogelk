@@ -1,7 +1,7 @@
 O neogelk é um pequeno webApp criado para acompanhar carteiras de investimentos.
 
 //TODO:
-- embelezar cadastro de operações, retirar a coluna tipo do BD, corrigir o cadastro inicial de ativos para cadastrar uma compra.
+- retirar a coluna tipo do BD.
 - Tela DASHBOARD incluir lucro vs inflação
 - Cortar acesso aos CRUDs de tipos e títulos para permissões abaixo de 90.
 - Permitir cadastro e edição de tipos e títulos, para usuários de baixa permissão, só enxergando os itens com o próprio user_id.

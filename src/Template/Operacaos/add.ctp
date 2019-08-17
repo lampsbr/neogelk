@@ -10,6 +10,7 @@ $this->extend('../Layout/TwitterBootstrap/dashboard');
 echo $this->Form->create($operacao); ?>
 <fieldset>
     <legend>Cadastrar operação</legend>
+    <span>Só mantenha o tipo aí (preciso arrancar do banco), e coloque a quantidade operada. Valores negativos para a venda de quantidades.</span>
     <?php
     echo $this->Form->hidden('ativo_id');
     echo $this->Form->control('tipo');
