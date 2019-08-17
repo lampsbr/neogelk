@@ -18,7 +18,7 @@ class AtivosController extends AppController
     public function isAuthorized($user){
         $action = $this->request->getParam('action');
         //por enquanto libera todas ações para quem estiver logado
-        if (in_array($action, ['add', 'edit', 'index', 'delete', 'view', 'dashboard', 'arquivo'])) {
+        if (in_array($action, ['add', 'edit', 'index', 'view', 'dashboard', 'arquivo', 'vender'])) {
             return true;
         }
         return false;
@@ -352,6 +352,16 @@ class AtivosController extends AppController
         $this->set(compact('ativo', 'titulos', 'users', 'carteiras'));
     }
 
+    public function vender($id){
+        $ativo = $this->Ativos->get($id);
+        $ativo->dt_venda = Time::now();
+        if ($this->Ativos->save($ativo)) {
+            $this->Flash->success('O ativo foi vendido!');
+            return $this->redirect(['action' => 'dashboard']);
+        }
+        $this->Flash->error('Houve um erro e o ativo não foi vendido. Tente novamente.');
+    }
+
     /**
      * Delete method
      *
@@ -359,7 +369,7 @@ class AtivosController extends AppController
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
+    /*public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
         $ativo = $this->Ativos->get($id);
@@ -370,5 +380,5 @@ class AtivosController extends AppController
         }
 
         return $this->redirect(['action' => 'dashboard']);
-    }
+    }*/
 }

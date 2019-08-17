@@ -5,9 +5,10 @@ echo $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.5
 $this->extend('../Layout/TwitterBootstrap/dashboard');
 $this->start('titulo');
 echo 'Detalhes de ativo'; 
-echo $this->Form->postLink('', ['action' => 'delete', $ativo->id], ['confirm' => __('Are you sure you want to delete # {0}?', $ativo->titulo->nome), 'title' => 'Apagar', 'class' => 'btn btn-default glyphicon glyphicon-trash pull-right']);
 echo $this->Html->link('', ['action' => 'edit', $ativo->id], ['title' => 'Editar', 'class' => 'btn btn-default glyphicon glyphicon-pencil pull-right']);
-echo $this->Html->link('', ['controller' => 'Operacaos','action' => 'add', $ativo->id], ['title' => 'Fazer operação', 'class' => 'btn btn-default glyphicon glyphicon-sort pull-right']);
+//echo $this->Html->link('', ['controller' => 'Operacaos','action' => 'add', $ativo->id], ['title' => 'Fazer operação', 'class' => 'btn btn-default glyphicon glyphicon-sort pull-right']);
+echo $this->Html->link(' Vender', ['controller' => 'Ativos','action' => 'vender', $ativo->id], ['title' => 'Vender', 'class' => 'btn btn-default glyphicon glyphicon-piggy-bank pull-right']);
+
 $this->end(); ?>
 <div class="col-sm-6 col-lg-4">
     <div class="panel panel-default">

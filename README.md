@@ -6,9 +6,7 @@ O neogelk é um pequeno webApp criado para acompanhar carteiras de investimentos
 - Cortar acesso aos CRUDs de tipos e títulos para permissões abaixo de 90.
 - Permitir cadastro e edição de tipos e títulos, para usuários de baixa permissão, só enxergando os itens com o próprio user_id.
 - Permitir user_id vazio nos cruds de tipo_titulo e titulo.
-
-- Colocar botão "vender" em ativos/view. 
-  - Dar a opção transferir o valor do ativo para um outro ativo (uma conta corrente, geralmente).
+- Ao vender um ativo, dar a opção de transferir o valor do ativo para um outro ativo (uma conta corrente, geralmente).
   - Para esta operação, pegar a cotação mais recente ou permitir salvar uma cotação e usar seu valor.
   
 
