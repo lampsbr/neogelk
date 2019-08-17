@@ -109,15 +109,27 @@ class Ativo extends Entity
     }
 
     protected function _getLucroPorcento(){
-        return '('.round((($this->valorCotacaoMaisRecente / $this->valorPrimeiraCotacao)-1)*100,2).'%)';
+        if($this->valorPrimeiraCotacao && $this->valorPrimeiraCotacao > 0){
+            return '('.round((($this->valorCotacaoMaisRecente / $this->valorPrimeiraCotacao)-1)*100,2).'%)';
+        } else{
+            return null;
+        }
     }
 
     protected function _getLucroNoAno(){
-        return round($this->quantidade * ($this->valorCotacaoMaisRecente - $this->valorPrimeiraCotacaoAno),2);
+        if($this->valorPrimeiraCotacao && $this->valorPrimeiraCotacao > 0){
+            return round($this->quantidade * ($this->valorCotacaoMaisRecente - $this->valorPrimeiraCotacaoAno),2);
+        } else {
+            return null;
+        }
     }
 
     protected function _getLucroNoAnoPorcento(){
-        return '('.round((($this->valorCotacaoMaisRecente / $this->valorPrimeiraCotacaoAno)-1)*100,2).'%)';
+        if($this->valorPrimeiraCotacao && $this->valorPrimeiraCotacao > 0){
+            return '('.round((($this->valorCotacaoMaisRecente / $this->valorPrimeiraCotacaoAno)-1)*100,2).'%)';
+        } else {
+            return null;
+        }
     }
 
     /**
